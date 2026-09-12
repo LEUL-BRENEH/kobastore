@@ -1,0 +1,4389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Koba Convenience Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Ethiopic:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+                   CSS VARIABLES - KOBA BRAND COLORS
+                ============================================================ */
+        :root {
+            --koba-green: #1E3D2B;
+            --koba-green-light: #2a5a3f;
+            --koba-green-dark: #152b1e;
+            --koba-gold: #C8A24A;
+            --koba-gold-light: #dbb86a;
+            --koba-gold-dark: #a8862e;
+            --koba-white: #FFFFFF;
+            --koba-cream: #f5f0e8;
+            --koba-gray: #8a8a8a;
+            --koba-dark: #1a1a1a;
+            --bg-body: #f5f0e8;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f5fbfa;
+            --bg-header: linear-gradient(145deg, #1E3D2B, #152b1e);
+            --bg-input: #f5f0e8;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-muted: #8a8a9a;
+            --border-color: #e0d8d0;
+            --border-focus: #C8A24A;
+            --accent: #C8A24A;
+            --accent-hover: #a8862e;
+            --accent-glow: rgba(200, 162, 74, 0.3);
+            --whatsapp: #25D366;
+            --whatsapp-hover: #1da85c;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #eab308;
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.10);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 40px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Montserrat', 'Segoe UI', sans-serif;
+            --font-ethiopic: 'Noto Sans Ethiopic', sans-serif;
+            --header-text: #ffffff;
+            --footer-border: #e2e8f0;
+            --badge-bg: rgba(200, 162, 74, 0.10);
+            --badge-color: #C8A24A;
+            --qty-bg: #f5f0e8;
+            --qty-color: #1a1a2e;
+            --selected-border: #C8A24A;
+            --selected-bg: rgba(200, 162, 74, 0.08);
+            --bottom-bar-bg: rgba(255, 255, 255, 0.95);
+            --loc-shared-color: #22c55e;
+            --loc-error-color: #ef4444;
+            --loc-pending-color: #eab308;
+        }
+
+        body.dark-mode {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #273548;
+            --bg-header: linear-gradient(145deg, #1E3D2B, #152b1e);
+            --bg-input: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --border-focus: #C8A24A;
+            --accent: #C8A24A;
+            --accent-hover: #a8862e;
+            --accent-glow: rgba(200, 162, 74, 0.3);
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --header-text: #f1f5f9;
+            --footer-border: #334155;
+            --badge-bg: rgba(200, 162, 74, 0.20);
+            --badge-color: #C8A24A;
+            --qty-bg: #334155;
+            --qty-color: #f1f5f9;
+            --selected-border: #C8A24A;
+            --selected-bg: rgba(200, 162, 74, 0.15);
+            --bottom-bar-bg: rgba(30, 41, 59, 0.95);
+            --loc-shared-color: #4ade80;
+            --loc-error-color: #f87171;
+            --loc-pending-color: #facc15;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 1rem 1rem 120px;
+            transition: background 0.4s, color 0.4s;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-body);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ============================================================
+                   HEADER
+                ============================================================ */
+        .header {
+            background: var(--bg-header);
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--radius-lg) var(--radius-lg) var(--radius-md) var(--radius-md);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.20);
+            margin-bottom: 1.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem 1.5rem;
+            color: var(--header-text);
+            transition: background 0.4s;
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .header-left .logo-icon {
+            font-size: 2rem;
+            color: var(--koba-gold);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header-left h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .header-left h1 .gold {
+            color: var(--koba-gold);
+        }
+
+        .header-left .tagline {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            font-weight: 300;
+            display: block;
+            margin-top: -2px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font);
+        }
+
+        .header-btn:hover {
+            background: var(--koba-gold);
+            color: var(--koba-green);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(200, 162, 74, 0.3);
+        }
+
+        .header-btn.active {
+            background: var(--koba-gold);
+            color: var(--koba-green);
+            border-color: var(--koba-gold);
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.10);
+            border-radius: 60px;
+            padding: 0.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font);
+            text-transform: uppercase;
+        }
+
+        .lang-btn.active {
+            background: var(--koba-gold);
+            color: var(--koba-green-dark);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: #fff;
+        }
+
+        /* ============================================================
+                   HERO
+                ============================================================ */
+        .hero {
+            background: linear-gradient(135deg, var(--koba-green-dark), var(--koba-green));
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--koba-gold);
+            box-shadow: var(--shadow-lg);
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200, 162, 74, 0.10), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--koba-white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 .highlight {
+            color: var(--koba-gold);
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0.8rem auto 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .address {
+            color: var(--koba-gold-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 0.6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .address i {
+            margin-right: 0.4rem;
+        }
+
+        .hero .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .badge-row .badge-item {
+            background: rgba(255, 255, 255, 0.10);
+            color: var(--koba-white);
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+        }
+
+        .hero .badge-row .badge-item:hover {
+            background: var(--koba-gold);
+            color: var(--koba-green-dark);
+            border-color: var(--koba-gold);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================================
+                   KOBA BUSINESS GROUP SECTION
+                ============================================================ */
+        #koba-business-group {
+            max-width: 1200px;
+            margin: 70px auto;
+            padding: 25px;
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--koba-gold);
+            transition: background 0.4s, border-color 0.4s, color 0.4s;
+        }
+
+        #koba-business-group .koba-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        #koba-business-group .koba-badge {
+            display: inline-block;
+            padding: 8px 17px;
+            border-radius: 50px;
+            background: rgba(8, 116, 67, 0.10);
+            color: var(--koba-green);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        #koba-business-group .koba-title {
+            margin: 0;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            background: linear-gradient(90deg, var(--koba-green-dark), var(--koba-green), var(--koba-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        #koba-business-group .koba-subtitle {
+            max-width: 680px;
+            margin: 14px auto 0;
+            color: var(--text-secondary);
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        #koba-business-group .gold-line {
+            width: 60px;
+            height: 4px;
+            border-radius: 20px;
+            background: var(--koba-gold);
+            margin: 16px auto 0;
+        }
+
+        #koba-business-group .koba-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        #koba-business-group .koba-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(8, 116, 67, 0.12);
+            border-radius: 24px;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.4s;
+        }
+
+        #koba-business-group .koba-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(8, 116, 67, 0.35);
+            box-shadow: var(--shadow-lg);
+        }
+
+        #koba-business-group .koba-toggle {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            color: inherit;
+            text-align: left;
+            font-family: var(--font);
+        }
+
+        #koba-business-group .koba-info {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+        }
+
+        #koba-business-group .koba-icon {
+            width: 58px;
+            height: 58px;
+            flex-shrink: 0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            background: linear-gradient(135deg, var(--koba-green), var(--koba-green-dark));
+            box-shadow: 0 8px 18px rgba(8, 116, 67, 0.25);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        #koba-business-group .koba-card:hover .koba-icon {
+            transform: scale(1.08) rotate(-3deg);
+            box-shadow: 0 12px 25px rgba(8, 116, 67, 0.30);
+        }
+
+        #koba-business-group .koba-name {
+            font-size: 20px;
+            font-weight: 850;
+            margin: 0 0 5px;
+        }
+
+        #koba-business-group .koba-type {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        #koba-business-group .koba-plus {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--badge-bg);
+            color: var(--koba-green);
+            font-size: 25px;
+            transition: transform 0.35s ease, background 0.35s ease, color 0.35s ease;
+        }
+
+        #koba-business-group .koba-card.active .koba-plus {
+            transform: rotate(45deg);
+            background: var(--koba-green);
+            color: white;
+        }
+
+        #koba-business-group .koba-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #koba-business-group .koba-card.active .koba-content {
+            grid-template-rows: 1fr;
+        }
+
+        #koba-business-group .koba-content-inner {
+            overflow: hidden;
+            padding: 0 24px;
+            transition: padding 0.4s ease;
+        }
+
+        #koba-business-group .koba-card.active .koba-content-inner {
+            padding: 0 24px 25px;
+        }
+
+        #koba-business-group .koba-image-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            background: var(--bg-body);
+        }
+
+        #koba-business-group .koba-image {
+            display: block;
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+
+        #koba-business-group .koba-card:hover .koba-image {
+            transform: scale(1.05);
+        }
+
+        #koba-business-group .koba-image-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.28), transparent 55%);
+            pointer-events: none;
+        }
+
+        #koba-business-group .koba-note {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            font-size: 15px;
+        }
+
+        #koba-business-group .koba-parent {
+            position: relative;
+            overflow: hidden;
+            margin-top: 25px;
+            padding: 32px;
+            border-radius: 25px;
+            color: white;
+            text-align: center;
+            background: radial-gradient(circle at 10% 20%, rgba(214, 169, 58, 0.25), transparent 30%),
+                        linear-gradient(135deg, var(--koba-green-dark), var(--koba-green));
+            box-shadow: 0 15px 40px rgba(4, 54, 36, 0.18);
+        }
+
+        #koba-business-group .koba-parent::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 50%;
+            right: -60px;
+            top: -70px;
+        }
+
+        #koba-business-group .koba-parent::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(214, 169, 58, 0.18);
+            border-radius: 50%;
+            left: -40px;
+            bottom: -40px;
+        }
+
+        #koba-business-group .koba-parent-title {
+            position: relative;
+            z-index: 2;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 7px;
+        }
+
+        #koba-business-group .koba-parent-sub {
+            position: relative;
+            z-index: 2;
+            opacity: 0.82;
+            font-size: 14px;
+        }
+
+        /* ============================================================
+                   FASCIA SIGN & SIDE BLADE
+                ============================================================ */
+        .fascia-sign {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--koba-gold);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .fascia-sign .sign-text .store-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--koba-green);
+            letter-spacing: -0.5px;
+        }
+
+        .fascia-sign .sign-text .store-name .gold {
+            color: var(--koba-gold);
+        }
+
+        .fascia-sign .sign-badge {
+            background: var(--koba-green);
+            color: var(--koba-white);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: 2px solid var(--koba-gold);
+            text-transform: uppercase;
+        }
+
+        .side-blade {
+            background: var(--koba-green);
+            border-radius: var(--radius-md);
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--koba-gold);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            color: var(--koba-white);
+            transition: background 0.4s;
+        }
+
+        .side-blade .blade-text .name {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .side-blade .blade-text .name .gold {
+            color: var(--koba-gold);
+        }
+
+        .side-blade .blade-badge {
+            background: var(--koba-gold);
+            color: var(--koba-green-dark);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ============================================================
+                   STORE MESSAGE
+                ============================================================ */
+        .store-message {
+            background: linear-gradient(135deg, var(--koba-gold), var(--koba-gold-dark));
+            border-radius: var(--radius-md);
+            padding: 1.2rem 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--koba-green-dark);
+            border: 3px solid var(--koba-green);
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .store-message h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .store-message p {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .store-message .address-line {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ============================================================
+                   TOOLBAR & LOCATION
+                ============================================================ */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            align-items: center;
+        }
+
+        .toolbar .search-wrapper {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .toolbar .search-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .toolbar .search-wrapper input {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 2.8rem;
+            border-radius: 60px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: var(--font);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .toolbar .search-wrapper input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .toolbar .btn-location {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 60px;
+            padding: 0.7rem 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .toolbar .btn-location:hover {
+            border-color: var(--border-focus);
+            background: var(--badge-bg);
+        }
+
+        .toolbar .btn-location i {
+            color: var(--accent);
+        }
+
+        /* ============================================================
+                   LOCATION STATUS BAR
+                ============================================================ */
+        .location-status-bar {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.2rem;
+            border: 2px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .location-status-bar .loc-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .location-status-bar .loc-label i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .location-status-bar .loc-status-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .location-status-bar .loc-status {
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.8rem;
+            border-radius: 60px;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+        }
+
+        .location-status-bar .loc-status.shared {
+            color: var(--loc-shared-color);
+            border-color: var(--loc-shared-color);
+            background: rgba(34, 197, 94, 0.08);
+        }
+
+        .location-status-bar .loc-status.error {
+            color: var(--loc-error-color);
+            border-color: var(--loc-error-color);
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        .location-status-bar .loc-actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .location-status-bar .btn-loc-action {
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .location-status-bar .btn-loc-action.btn-share {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .location-status-bar .btn-loc-action.btn-share:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px var(--accent-glow);
+        }
+
+        .location-status-bar .btn-loc-action.btn-manual {
+            background: var(--badge-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .location-status-bar .btn-loc-action.btn-manual:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .location-status-bar .btn-loc-action.btn-clear-loc {
+            background: var(--badge-bg);
+            color: var(--danger);
+            border: 1px solid var(--border-color);
+        }
+
+        .location-status-bar .btn-loc-action.btn-clear-loc:hover {
+            background: var(--danger);
+            color: #fff;
+            border-color: var(--danger);
+        }
+
+        /* ============================================================
+                   MODALS
+                ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-xl);
+            border: 2px solid var(--border-color);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .modal-content h3 i {
+            color: var(--accent);
+        }
+
+        .modal-content .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .modal-content .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .modal-content .form-group input {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: var(--font);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .modal-content .form-group input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .modal-content .modal-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-content .modal-actions .btn-modal {
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font);
+            flex: 1;
+        }
+
+        .modal-content .modal-actions .btn-modal.btn-save {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .modal-content .modal-actions .btn-modal.btn-save:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        .modal-content .modal-actions .btn-modal.btn-cancel {
+            background: var(--badge-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-content .modal-actions .btn-modal.btn-cancel:hover {
+            background: var(--danger);
+            color: #fff;
+            border-color: var(--danger);
+        }
+
+        /* ============================================================
+                   BAG MODAL
+                ============================================================ */
+        .bag-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            animation: fadeIn 0.3s ease;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .bag-modal-overlay.active {
+            display: flex;
+        }
+
+        .bag-modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: var(--shadow-xl);
+            border: 3px solid var(--koba-gold);
+            animation: slideUp 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .bag-modal-content .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.8rem;
+        }
+
+        .bag-modal-content .modal-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .bag-modal-content .modal-header h3 i {
+            color: var(--accent);
+        }
+
+        .bag-modal-content .modal-header .close-modal-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 0 0.4rem;
+        }
+
+        .bag-modal-content .modal-header .close-modal-btn:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        .bag-modal-content .product-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            background: var(--bg-body);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .bag-modal-content .product-info img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .bag-modal-content .product-info .info-text {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .bag-modal-content .product-info .info-text .sub {
+            display: block;
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .bag-modal-content .bag-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .bag-modal-content .bag-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-card);
+        }
+
+        .bag-modal-content .bag-option:hover {
+            border-color: var(--accent);
+            background: var(--badge-bg);
+        }
+
+        .bag-modal-content .bag-option.selected {
+            border-color: var(--selected-border);
+            background: var(--selected-bg);
+            box-shadow: 0 0 0 3px rgba(200, 162, 74, 0.2);
+        }
+
+        .bag-modal-content .bag-option .bag-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bag-modal-content .bag-option .bag-info .bag-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .bag-modal-content .bag-option .bag-info .bag-size {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .bag-modal-content .bag-option .bag-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .bag-modal-content .bag-option .bag-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .bag-modal-content .bag-option .bag-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: transparent;
+            transition: 0.3s;
+        }
+
+        .bag-modal-content .bag-option.selected .bag-radio {
+            border-color: var(--selected-border);
+        }
+
+        .bag-modal-content .bag-option.selected .bag-radio::after {
+            background: var(--selected-border);
+        }
+
+        .bag-modal-content .bag-qty-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 0 1.2rem;
+            padding: 0.8rem 1rem;
+            background: var(--bg-body);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .bag-modal-content .bag-qty-section .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .bag-modal-content .bag-qty-section .qty-control button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bag-modal-content .bag-qty-section .qty-control button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .bag-modal-content .bag-qty-section .qty-control .qty-num {
+            font-weight: 700;
+            font-size: 1.2rem;
+            min-width: 30px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .bag-modal-content .modal-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .bag-modal-content .modal-actions .btn-modal-action {
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font);
+            flex: 1;
+        }
+
+        .bag-modal-content .modal-actions .btn-modal-action.btn-add-bag {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .bag-modal-content .modal-actions .btn-modal-action.btn-add-bag:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        .bag-modal-content .modal-actions .btn-modal-action.btn-skip-bag {
+            background: var(--badge-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* ============================================================
+                   PRODUCT GRID
+                ============================================================ */
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .shop-header .shop-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .shop-header .shop-title i {
+            color: var(--accent);
+        }
+
+        .shop-header .shop-title small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .shop-header .bulk-actions {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .shop-header .bulk-actions .btn-bulk {
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .shop-header .bulk-actions .btn-bulk:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .shop-header .bulk-actions .btn-bulk.select-all {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .shop-header .bulk-actions .btn-bulk.select-all:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .shop-header .bulk-actions .btn-bulk.deselect-all {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .shop-header .bulk-actions .btn-bulk.deselect-all:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1rem 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .product-card.selected {
+            border-color: var(--selected-border);
+            background: var(--selected-bg);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 0 0 4px rgba(200, 162, 74, 0.12), var(--shadow-lg);
+        }
+
+        .product-card .qty-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--selected-border);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.75rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-card);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s;
+        }
+
+        .product-card.selected .qty-badge {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .product-card .product-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            background: var(--bg-body);
+            padding: 0.2rem;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.03);
+            border-color: var(--accent);
+        }
+
+        .product-card h3 {
+            margin: 0.6rem 0 0.1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .product-card .category-tag {
+            display: inline-block;
+            background: var(--badge-bg);
+            color: var(--badge-color);
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.15rem 0.8rem;
+            border-radius: 60px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.2rem;
+        }
+
+        .product-card .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 0.2rem;
+        }
+
+        .product-card .qty-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.6rem;
+            background: var(--qty-bg);
+            padding: 0.15rem 0.4rem;
+            border-radius: 60px;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .product-card.selected .qty-selector {
+            opacity: 1;
+            max-height: 60px;
+            padding: 0.2rem 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-selector button {
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--qty-color);
+            cursor: pointer;
+            padding: 0 0.3rem;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .qty-selector button:hover {
+            background: var(--badge-bg);
+            color: var(--accent);
+        }
+
+        .qty-selector .qty-value {
+            min-width: 24px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--qty-color);
+        }
+
+        .product-card .select-hint {
+            margin-top: 0.4rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .product-card.selected .select-hint {
+            color: var(--selected-border);
+        }
+
+        /* ============================================================
+                   SELECTION PANEL
+                ============================================================ */
+        .selection-panel {
+            background: var(--bg-card);
+            border: 2px solid var(--selected-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0 2rem;
+            display: none;
+            box-shadow: var(--shadow-md);
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .selection-panel.visible {
+            display: block;
+        }
+
+        .selection-panel .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .selection-panel .panel-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-primary);
+        }
+
+        .selection-panel .panel-header h3 i {
+            color: var(--selected-border);
+        }
+
+        .selection-panel .panel-header .count-badge {
+            background: var(--selected-border);
+            color: #fff;
+            font-weight: 700;
+            padding: 0.2rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+        }
+
+        .selected-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 220px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding-right: 0.3rem;
+        }
+
+        .selected-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            border-left: 4px solid var(--selected-border);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            animation: fadeInItem 0.3s ease;
+        }
+
+        @keyframes fadeInItem {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .selected-item-row .item-info {
+            display: flex;
+            gap: 1rem;
+            font-weight: 500;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .selected-item-row .item-info .item-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .selected-item-row .item-info .item-name img {
+            width: 28px;
+            height: 28px;
+            object-fit: cover;
+            border-radius: 6px;
+            background: var(--bg-body);
+        }
+
+        .selected-item-row .item-info .item-qty-control {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .selected-item-row .item-info .item-qty-control button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .selected-item-row .item-info .item-qty-control button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .selected-item-row .item-info .item-qty-control .qty-num {
+            font-weight: 700;
+            min-width: 18px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .selected-item-row .btn-remove-item {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+            padding: 0.2rem;
+        }
+
+        .selected-item-row .btn-remove-item:hover {
+            transform: scale(1.2);
+            color: #ff6b5a;
+        }
+
+        .delivery-summary-box {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.2rem;
+            margin: 0.8rem 0 1.2rem;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .delivery-summary-box.visible {
+            display: block;
+        }
+
+        .delivery-summary-box .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.2rem 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .delivery-summary-box .summary-row.total-row {
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-top: 2px solid var(--border-color);
+            padding-top: 0.6rem;
+            margin-top: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .delivery-summary-box .summary-row .summary-label {
+            color: var(--text-secondary);
+        }
+
+        .delivery-summary-box .summary-row .summary-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .delivery-summary-box .summary-row.total-row .summary-value {
+            color: var(--accent);
+        }
+
+        .panel-actions-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .panel-actions-row .left-group {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .panel-actions-row .btn-action {
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font);
+        }
+
+        .panel-actions-row .btn-action.btn-clear {
+            background: var(--badge-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .panel-actions-row .btn-action.btn-clear:hover {
+            background: var(--danger);
+            color: #fff;
+            border-color: var(--danger);
+        }
+
+        .panel-actions-row .btn-action.btn-chat {
+            background: var(--whatsapp);
+            color: #fff;
+        }
+
+        .panel-actions-row .btn-action.btn-chat:hover {
+            background: var(--whatsapp-hover);
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+        }
+
+        .panel-actions-row .btn-action.btn-proceed {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .panel-actions-row .btn-action.btn-proceed:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+
+        /* ============================================================
+                   BUSINESS CARD
+                ============================================================ */
+        .business-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--koba-gold);
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .business-card .card-front {
+            padding: 1.5rem;
+            background: var(--bg-body);
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--koba-green);
+            text-align: center;
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .business-card .card-front .card-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--koba-green);
+        }
+
+        .business-card .card-front .card-logo .gold {
+            color: var(--koba-gold);
+        }
+
+        .business-card .card-front .card-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--koba-gold);
+            margin: 0.8rem auto;
+            border-radius: 10px;
+        }
+
+        .business-card .card-front .card-details {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .business-card .card-front .card-details i {
+            color: var(--koba-gold);
+            width: 20px;
+        }
+
+        .business-card .card-back {
+            padding: 1.5rem;
+            background: var(--koba-green);
+            border-radius: var(--radius-sm);
+            color: var(--koba-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--koba-gold);
+            transition: background 0.4s;
+        }
+
+        .business-card .card-back .tagline {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--koba-gold);
+        }
+
+        .business-card .card-back .tagline-small {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+
+        .business-card .card-back .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .business-card .card-back .social-icons a {
+            color: var(--koba-white);
+            font-size: 1.4rem;
+            transition: all 0.3s;
+        }
+
+        .business-card .card-back .social-icons a:hover {
+            color: var(--koba-gold);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================================
+                   CONTACT PAGE
+                ============================================================ */
+        .contact-page-wrapper {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            max-width: 1100px;
+            margin: 0 auto;
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .contact-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        .contact-sidebar {
+            background: var(--bg-body);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-sidebar .order-preview-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-sidebar .order-preview-card .preview-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            padding: 0.3rem;
+            border: 2px solid var(--border-color);
+        }
+
+        .contact-sidebar .order-preview-card .preview-text {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .contact-sidebar .order-preview-card .preview-text .sub-text {
+            display: block;
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-sidebar .delivery-rules-box {
+            background: var(--badge-bg);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            border-left: 4px solid var(--accent);
+            margin: 0.8rem 0;
+        }
+
+        .contact-sidebar .delivery-rules-box strong {
+            color: var(--accent);
+        }
+
+        .contact-sidebar .store-info {
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-sidebar .store-info i {
+            color: var(--accent);
+        }
+
+        .contact-form-wrapper {
+            background: var(--bg-body);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-primary);
+        }
+
+        .contact-form-wrapper h3 i {
+            color: var(--whatsapp);
+        }
+
+        .contact-form-wrapper .form-group {
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-form-wrapper .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-form-wrapper .form-group input,
+        .contact-form-wrapper .form-group textarea {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 60px;
+            font-size: 0.95rem;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: var(--font);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .contact-form-wrapper .form-group textarea {
+            border-radius: var(--radius-sm);
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .contact-form-wrapper .form-group input:focus,
+        .contact-form-wrapper .form-group textarea:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .message-preview-box {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            white-space: pre-wrap;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            max-height: 200px;
+            overflow-y: auto;
+            line-height: 1.5;
+        }
+
+        .btn-submit-wa {
+            background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-hover));
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            padding: 0.7rem 2.5rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-submit-wa:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-submit-wa:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .wa-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        /* ============================================================
+                   FIXED BOTTOM BAR
+                ============================================================ */
+        .fixed-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bottom-bar-bg);
+            border-top: 2px solid var(--selected-border);
+            padding: 0.7rem 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            z-index: 1000;
+            box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+            min-height: 64px;
+        }
+
+        .fixed-bottom-bar.visible {
+            display: flex;
+            animation: slideUpBar 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUpBar {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fixed-bottom-bar .bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .fixed-bottom-bar .bar-left .cart-icon-wrap {
+            position: relative;
+            font-size: 1.4rem;
+            color: var(--selected-border);
+        }
+
+        .fixed-bottom-bar .bar-left .cart-icon-wrap .cart-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--danger);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fixed-bottom-bar .bar-left .bar-summary {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .fixed-bottom-bar .bar-left .bar-summary strong {
+            color: var(--text-primary);
+        }
+
+        .fixed-bottom-bar .bar-left .bar-total {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .fixed-bottom-bar .bar-right {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .fixed-bottom-bar .bar-right .btn-bar {
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font);
+        }
+
+        .fixed-bottom-bar .bar-right .btn-bar.btn-bar-clear {
+            background: var(--badge-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .fixed-bottom-bar .bar-right .btn-bar.btn-bar-clear:hover {
+            background: var(--danger);
+            color: #fff;
+            border-color: var(--danger);
+        }
+
+        .fixed-bottom-bar .bar-right .btn-bar.btn-bar-chat {
+            background: var(--whatsapp);
+            color: #fff;
+        }
+
+        .fixed-bottom-bar .bar-right .btn-bar.btn-bar-chat:hover {
+            background: var(--whatsapp-hover);
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+        }
+
+        .fixed-bottom-bar .bar-right .btn-bar.btn-bar-contact {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .fixed-bottom-bar .bar-right .btn-bar.btn-bar-contact:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+
+        /* ============================================================
+                   PAGE TOGGLE
+                ============================================================ */
+        .page {
+            display: none;
+            animation: fadePage 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadePage {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================================
+                   MAP & FOOTER
+                ============================================================ */
+        .map-container {
+            width: 100%;
+            height: 220px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+            transition: border-color 0.4s;
+            cursor: pointer;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .map-container .map-overlay-label {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .site-footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--footer-border);
+            padding-top: 1.5rem;
+        }
+
+        .site-footer .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--koba-green);
+        }
+
+        .site-footer .footer-logo .gold {
+            color: var(--koba-gold);
+        }
+
+        .site-footer .footer-tagline {
+            color: var(--koba-gray);
+            font-weight: 500;
+            margin: 0.3rem 0;
+        }
+
+        .site-footer .footer-address {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin: 0.5rem 0;
+        }
+
+        .site-footer .footer-divider {
+            width: 80px;
+            height: 2px;
+            background: var(--koba-gold);
+            margin: 1rem auto;
+            border-radius: 10px;
+        }
+
+        .site-footer .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .site-footer .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .site-footer .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .site-footer .footer-bottom {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                ============================================================ */
+        @media screen and (max-width: 1024px) {
+            .contact-grid-layout {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .business-card {
+                grid-template-columns: 1fr;
+            }
+            #koba-business-group .koba-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 0.8rem 0.8rem 110px;
+            }
+            .header {
+                padding: 0.6rem 1rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.6rem;
+                position: static;
+                border-radius: var(--radius-md);
+            }
+            .header-left h1 {
+                font-size: 1.3rem;
+            }
+            .header-actions {
+                justify-content: stretch;
+            }
+            .header-actions .header-btn {
+                flex: 1;
+                justify-content: center;
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .lang-selector {
+                justify-content: center;
+            }
+            .hero {
+                padding: 1.5rem 1rem;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .product-card .product-image {
+                width: 100px;
+                height: 100px;
+            }
+            #koba-business-group .koba-grid {
+                grid-template-columns: 1fr;
+            }
+            #koba-business-group {
+                padding: 15px;
+                margin: 40px auto;
+            }
+            #koba-business-group .koba-image {
+                height: 200px;
+            }
+            .business-card {
+                grid-template-columns: 1fr;
+            }
+            .contact-page-wrapper {
+                padding: 1rem 1.2rem;
+            }
+            .contact-form-wrapper {
+                padding: 1rem;
+            }
+            .contact-grid-layout {
+                grid-template-columns: 1fr;
+            }
+            .fixed-bottom-bar {
+                padding: 0.5rem 0.8rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.4rem;
+            }
+            .fixed-bottom-bar .bar-left {
+                justify-content: center;
+            }
+            .fixed-bottom-bar .bar-right {
+                justify-content: center;
+            }
+            .fixed-bottom-bar .bar-right .btn-bar {
+                flex: 1;
+                justify-content: center;
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .shop-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .shop-header .bulk-actions {
+                justify-content: stretch;
+            }
+            .shop-header .bulk-actions .btn-bulk {
+                flex: 1;
+                justify-content: center;
+                font-size: 0.7rem;
+            }
+            .location-status-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0.8rem 1rem;
+                text-align: center;
+            }
+            .location-status-bar .loc-label {
+                justify-content: center;
+            }
+            .location-status-bar .loc-status-container {
+                justify-content: center;
+            }
+            .location-status-bar .loc-actions {
+                justify-content: center;
+            }
+            .map-container {
+                height: 160px;
+            }
+            .selection-panel {
+                padding: 1rem 1.2rem;
+            }
+            .panel-actions-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .panel-actions-row .left-group {
+                flex-direction: column;
+            }
+            .panel-actions-row .btn-action {
+                justify-content: center;
+            }
+            .business-card {
+                padding: 1rem;
+            }
+            .business-card .card-front,
+            .business-card .card-back {
+                padding: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 420px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+            }
+            .product-card {
+                padding: 0.8rem 0.4rem 0.8rem;
+            }
+            .product-card .product-image {
+                width: 80px;
+                height: 80px;
+            }
+            .product-card h3 {
+                font-size: 0.75rem;
+            }
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            .fixed-bottom-bar .bar-left .bar-total {
+                font-size: 1rem;
+            }
+            .hero .badge-row .badge-item {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.6rem;
+            }
+            #koba-business-group .koba-toggle {
+                padding: 17px;
+            }
+            #koba-business-group .koba-icon {
+                width: 52px;
+                height: 52px;
+                font-size: 24px;
+            }
+            #koba-business-group .koba-name {
+                font-size: 17px;
+            }
+            #koba-business-group .koba-plus {
+                width: 35px;
+                height: 35px;
+                font-size: 21px;
+            }
+            #koba-business-group .koba-parent {
+                padding: 25px 15px;
+            }
+            .bag-modal-content .bag-option {
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+            .bag-modal-content {
+                padding: 1.2rem;
+                margin: 0.5rem;
+            }
+            .bag-modal-content .bag-options {
+                gap: 0.5rem;
+            }
+            .bag-modal-content .bag-option {
+                padding: 0.6rem 0.8rem;
+            }
+            .bag-modal-content .modal-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ==========================================================
+        HEADER
+        ========================================================== -->
+        <header class="header">
+            <div class="header-left">
+                <span class="logo-icon"><i class="fas fa-store"></i></span>
+                <div>
+                    <h1>
+                        <span class="lang-en">Koba Business Group</span>
+                        <span class="lang-am" style="display:none;">የኮባ ቢዝነስ ግሩፕ</span>
+                        <span class="gold lang-en">9811575 Canada Ltd.</span>
+                        <span class="gold lang-am" style="display:none;">209811575 ካናዳ ሊሚትድ</span>
+                    </h1>
+                    <span class="tagline lang-en"><i class="fas fa-map-pin"></i> 99 Howard St, Toronto</span>
+                    <span class="tagline lang-am" style="display:none;"><i class="fas fa-map-pin"></i> 99 ሃዋርድ ስትሪት፣ ቶሮንቶ</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="am">አማ</button>
+                </div>
+                <button class="header-btn active" id="homeNavBtn"><i class="fas fa-house"></i> <span class="lang-en">Home</span><span class="lang-am" style="display:none;">መነሻ</span></button>
+                <button class="header-btn" id="contactNavBtn"><i class="fas fa-envelope"></i> <span class="lang-en">Contact</span><span class="lang-am" style="display:none;">አግኙን</span></button>
+                <button class="header-btn" id="themeToggle"><i class="fas fa-moon"></i> <span class="lang-en">Theme</span><span class="lang-am" style="display:none;">ጨለማ</span></button>
+            </div>
+        </header>
+
+        <!-- ==========================================================
+        HOME PAGE
+        ========================================================== -->
+        <div class="page active" id="homePage">
+
+            <!-- ==========================================================
+            KOBA BUSINESS GROUP SECTION
+            ========================================================== -->
+            <section id="koba-business-group">
+                <div class="koba-header">
+                    <div class="koba-badge">
+                        <span class="lang-en">Koba Group</span>
+                        <span class="lang-am" style="display:none;">የኮባ ግሩፕ</span>
+                    </div>
+                    <h2 class="koba-title">
+                        <span class="lang-en">Our Family of Businesses</span>
+                        <span class="lang-am" style="display:none;">የንግድ ቤተሰባችን</span>
+                    </h2>
+                    <p class="koba-subtitle">
+                        <span class="lang-en">Serving our community through excellence in travel, events, agriculture, and retail.</span>
+                        <span class="lang-am" style="display:none;">በጉዞ፣ በዝግጅቶች፣ በግብርና እና በችርቻሮ ማህበረሰባችንን በልጅነት እናገለግላለን።</span>
+                    </p>
+                    <div class="gold-line"></div>
+                </div>
+
+                <div class="koba-grid">
+                    <!-- Koba Vacations -->
+                    <div class="koba-card">
+                        <button type="button" class="koba-toggle" onclick="kobaBusinessToggle(this)" aria-expanded="false">
+                            <div class="koba-info">
+                                <div class="koba-icon">✈️</div>
+                                <div>
+                                    <h3 class="koba-name">
+                                        <span class="lang-en">Koba Vacations</span>
+                                        <span class="lang-am" style="display:none;">ኮባ ቫኬሽን</span>
+                                    </h3>
+                                    <div class="koba-type">
+                                        <span class="lang-en">Travel & Tourism</span>
+                                        <span class="lang-am" style="display:none;">ጉዞ እና ቱሪዝም</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="koba-plus">+</div>
+                        </button>
+                        <div class="koba-content">
+                            <div class="koba-content-inner">
+                                <div class="koba-image-wrap">
+                                    <img class="koba-image" src="image/a.png" alt="Koba Vacations" loading="lazy" />
+                                </div>
+                                <p class="koba-note">
+                                    <span class="lang-en">Koba Vacations focuses on travel, tourism and creating memorable vacation experiences for customers.</span>
+                                    <span class="lang-am" style="display:none;">ኮባ ቫኬሽን በጉዞ፣ በቱሪዝም እና ለደንበኞች የማይረሱ የበዓል ተሞክሮዎችን በመፍጠር ላይ ያተኩራል።</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Koba Event Planning -->
+                    <div class="koba-card">
+                        <button type="button" class="koba-toggle" onclick="kobaBusinessToggle(this)" aria-expanded="false">
+                            <div class="koba-info">
+                                <div class="koba-icon">🎉</div>
+                                <div>
+                                    <h3 class="koba-name">
+                                        <span class="lang-en">Koba Event Planning</span>
+                                        <span class="lang-am" style="display:none;">ኮባ ዝግጅት እቅድ</span>
+                                    </h3>
+                                    <div class="koba-type">
+                                        <span class="lang-en">Events & Experiences</span>
+                                        <span class="lang-am" style="display:none;">ዝግጅቶች እና ተሞክሮዎች</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="koba-plus">+</div>
+                        </button>
+                        <div class="koba-content">
+                            <div class="koba-content-inner">
+                                <div class="koba-image-wrap">
+                                    <img class="koba-image" src="image/b.png" alt="Koba Event Planning" loading="lazy" />
+                                </div>
+                                <p class="koba-note">
+                                    <span class="lang-en">Koba Event Planning provides event organization and planning services for celebrations, corporate events and special occasions.</span>
+                                    <span class="lang-am" style="display:none;">ኮባ ዝግጅት እቅድ ለክብረ በዓላት፣ ለኮርፖሬት ዝግጅቶች እና ልዩ በዓላት የዝግጅት አደረጃጀት እና እቅድ አገልግሎቶችን ይሰጣል።</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Koba Farm -->
+                    <div class="koba-card">
+                        <button type="button" class="koba-toggle" onclick="kobaBusinessToggle(this)" aria-expanded="false">
+                            <div class="koba-info">
+                                <div class="koba-icon">🌱</div>
+                                <div>
+                                    <h3 class="koba-name">
+                                        <span class="lang-en">Koba Farm</span>
+                                        <span class="lang-am" style="display:none;">ኮባ እርሻ</span>
+                                    </h3>
+                                    <div class="koba-type">
+                                        <span class="lang-en">Agriculture & Food</span>
+                                        <span class="lang-am" style="display:none;">ግብርና እና ምግብ</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="koba-plus">+</div>
+                        </button>
+                        <div class="koba-content">
+                            <div class="koba-content-inner">
+                                <div class="koba-image-wrap">
+                                    <img class="koba-image" src="image/c.png" alt="Koba Farm" loading="lazy" />
+                                </div>
+                                <p class="koba-note">
+                                    <span class="lang-en">Koba Farm focuses on agriculture and food production, with an emphasis on quality agricultural products.</span>
+                                    <span class="lang-am" style="display:none;">ኮባ እርሻ በግብርና እና በምግብ ምርት ላይ ያተኩራል፣ በጥራት የግብርና ምርቶች ላይ አጽንዖት ይሰጣል።</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Koba Convenience & Liquidation -->
+                    <div class="koba-card">
+                        <button type="button" class="koba-toggle" onclick="kobaBusinessToggle(this)" aria-expanded="false">
+                            <div class="koba-info">
+                                <div class="koba-icon">🛒</div>
+                                <div>
+                                    <h3 class="koba-name">
+                                        <span class="lang-en">Koba Convenience & Liquidation</span>
+                                        <span class="lang-am" style="display:none;">ኮባ ምቹ መደብር እና ሊቅዊዴሽን</span>
+                                    </h3>
+                                    <div class="koba-type">
+                                        <span class="lang-en">Retail & Liquidation</span>
+                                        <span class="lang-am" style="display:none;">ችርቻሮ እና ሊቅዊዴሽን</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="koba-plus">+</div>
+                        </button>
+                        <div class="koba-content">
+                            <div class="koba-content-inner">
+                                <div class="koba-image-wrap">
+                                    <img class="koba-image" src="image/d.png" alt="Koba Convenience & Liquidation" loading="lazy" />
+                                </div>
+                                <p class="koba-note">
+                                    <span class="lang-en">Koba Convenience & Liquidation focuses on convenient retail shopping, everyday products and value-focused liquidation opportunities.</span>
+                                    <span class="lang-am" style="display:none;">ኮባ ምቹ መደብር እና ሊቅዊዴሽን በምቹ የችርቻሮ ግብይት፣ የዕለት ተዕለት ምርቶች እና በዋጋ ላይ ያተኮሩ የሊቅዊዴሽን እድሎች ላይ ያተኩራል።</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parent Company -->
+                <div class="koba-parent">
+                    <div class="koba-parent-title">
+                        <span class="lang-en">Koba Business Group 9811575 Canada Ltd.</span>
+                        <span class="lang-am" style="display:none;">ኮባ ቢዝነስ ግሩፕ 9811575 ካናዳ ሊሚትድ</span>
+                    </div>
+                    <div class="koba-parent-sub">
+                        <span class="lang-en">General Business Entity</span>
+                        <span class="lang-am" style="display:none;">አጠቃላይ የንግድ አካል</span>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                function kobaBusinessToggle(button) {
+                    var card = button.closest(".koba-card");
+                    var allCards = document.querySelectorAll("#koba-business-group .koba-card");
+
+                    allCards.forEach(function(otherCard) {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove("active");
+                            var otherButton = otherCard.querySelector(".koba-toggle");
+                            if (otherButton) {
+                                otherButton.setAttribute("aria-expanded", "false");
+                            }
+                        }
+                    });
+
+                    var isActive = card.classList.toggle("active");
+                    button.setAttribute("aria-expanded", isActive ? "true" : "false");
+                }
+            </script>
+
+            <!-- ==========================================================
+            HERO
+            ========================================================== -->
+            <section class="hero">
+                <h2>
+                    <span class="lang-en">Your Neighborhood <span class="highlight">Convenience Store</span></span>
+                    <span class="lang-am" style="display:none;">የአካባቢዎ <span class="highlight">ምቹ መደብር</span></span>
+                </h2>
+                <p class="lang-en">Habesha groceries, fresh injera, coffee &amp; tea, spices &amp; berbere, household essentials, drinks &amp; snacks.</p>
+                <p class="lang-am" style="display:none;">የሀበሻ ግሮሰሪ፣ ትኩስ እንጀራ፣ ቡናና ሻይ፣ ቅመማ ቅመም፣ የቤት ውስጥ ፍላጎቶች፣ መጠጦችና መክሰስ</p>
+                <div class="address lang-en"><i class="fas fa-location-dot"></i> 99 Howard Street, Unit 1, Toronto, ON M4X 1K1</div>
+                <div class="address lang-am" style="display:none;"><i class="fas fa-location-dot"></i> 99 ሃዋርድ ስትሪት፣ ቁጥር 1፣ ቶሮንቶ፣ ON M4X 1K1</div>
+                <div class="badge-row">
+                    <span class="badge-item"><i class="fas fa-utensils"></i> <span class="lang-en">Habesha Groceries</span><span class="lang-am" style="display:none;">የሀበሻ ግሮሰሪ</span></span>
+                    <span class="badge-item"><i class="fas fa-bread"></i> <span class="lang-en">Fresh Injera</span><span class="lang-am" style="display:none;">ትኩስ እንጀራ</span></span>
+                    <span class="badge-item"><i class="fas fa-mug-saucer"></i> <span class="lang-en">Coffee &amp; Tea</span><span class="lang-am" style="display:none;">ቡናና ሻይ</span></span>
+                    <span class="badge-item"><i class="fas fa-pepper"></i> <span class="lang-en">Berbere &amp; Spices</span><span class="lang-am" style="display:none;">በርበሬና ቅመማ ቅመም</span></span>
+                </div>
+            </section>
+
+            <!-- ==========================================================
+            FASCIA SIGN
+            ========================================================== -->
+            <div class="fascia-sign">
+                <div class="sign-text">
+                    <span class="store-name">
+                        <span class="lang-en">KOBA</span><span class="lang-am" style="display:none;">ኮባ</span>
+                        <span class="gold lang-en">CONVENIENCE</span>
+                        <span class="gold lang-am" style="display:none;">ምቹ መደብር</span>
+                    </span>
+                </div>
+                <span class="sign-badge"><i class="fas fa-lightbulb"></i> <span class="lang-en">ILLUMINATED</span><span class="lang-am" style="display:none;">የሚያበራ</span></span>
+            </div>
+
+            <!-- ==========================================================
+            SIDE BLADE SIGN
+            ========================================================== -->
+            <div class="side-blade">
+                <div class="blade-text">
+                    <span class="name">
+                        <span class="lang-en">KOBA</span><span class="lang-am" style="display:none;">ኮባ</span>
+                        <span class="gold lang-en">CONVENIENCE</span>
+                        <span class="gold lang-am" style="display:none;">ምቹ መደብር</span>
+                    </span>
+                    <span style="font-size:0.7rem; opacity:0.7;">24" x 30"</span>
+                </div>
+                <span class="blade-badge"><i class="fas fa-store"></i> <span class="lang-en">Opening Soon</span><span class="lang-am" style="display:none;">በቅርቡ እንከፍታለን</span></span>
+            </div>
+
+            <!-- ==========================================================
+            STORE MESSAGE
+            ========================================================== -->
+            <div class="store-message">
+                <h3 class="lang-en"><i class="fas fa-store-alt"></i> Your Neighborhood Convenience Store</h3>
+                <h3 class="lang-am" style="display:none;"><i class="fas fa-store-alt"></i> የአካባቢዎ ምቹ መደብር</h3>
+                <p class="lang-en">Habesha Groceries · Fresh Injera · Coffee &amp; Tea · Berbere &amp; Spices · Household Essentials · Drinks &amp; Snacks</p>
+                <p class="lang-am" style="display:none;">የሀበሻ ግሮሰሪ · ትኩስ እንጀራ · ቡናና ሻይ · በርበሬና ቅመማ ቅመም · የቤት ውስጥ ፍላጎቶች · መጠጦችና መክሰስ</p>
+                <div class="address-line"><i class="fas fa-location-dot"></i> 99 Howard Street, Unit 1, Toronto, ON M4X 1K1</div>
+            </div>
+
+            <!-- ==========================================================
+            TOOLBAR
+            ========================================================== -->
+            <div class="toolbar">
+                <div class="search-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search products..." />
+                </div>
+                <button class="btn-location" id="locationBtn" onclick="window.open('https://www.google.com/maps?q=99+Howard+Street+Toronto+ON+M4X+1K1','_blank')">
+                    <i class="fas fa-map-pin"></i> <span class="lang-en">Open in Google Maps</span><span class="lang-am" style="display:none;">ጎግል ካርታ ክፈት</span>
+                </button>
+            </div>
+
+            <!-- ==========================================================
+            LOCATION STATUS BAR
+            ========================================================== -->
+            <div class="location-status-bar" id="locationStatusBar">
+                <span class="loc-label"><i class="fas fa-location-dot"></i> <span class="lang-en">Location</span><span class="lang-am" style="display:none;">ቦታ</span></span>
+                <div class="loc-status-container">
+                    <span class="loc-status default" id="locStatus"><span class="status-icon">📍</span> <span class="lang-en">Not shared</span><span class="lang-am" style="display:none;">አልተጋራም</span></span>
+                </div>
+                <div class="loc-actions">
+                    <button class="btn-loc-action btn-share" id="locShareBtn"><i class="fas fa-share"></i> <span class="lang-en">Share GPS</span><span class="lang-am" style="display:none;">ጂፒኤስ አጋራ</span></button>
+                    <button class="btn-loc-action btn-manual" id="locManualBtn"><i class="fas fa-pen"></i> <span class="lang-en">Manual</span><span class="lang-am" style="display:none;">በእጅ አስገባ</span></button>
+                    <button class="btn-loc-action btn-clear-loc" id="locClearBtn" style="display:none;"><i class="fas fa-times"></i> <span class="lang-en">Clear</span><span class="lang-am" style="display:none;">አጽዳ</span></button>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+            MANUAL LOCATION MODAL
+            ========================================================== -->
+            <div class="modal-overlay" id="manualLocationModal">
+                <div class="modal-content">
+                    <h3><i class="fas fa-pen"></i> <span class="lang-en">Enter Location Manually</span><span class="lang-am" style="display:none;">ቦታዎን በእጅ ያስገቡ</span></h3>
+                    <p class="lang-en">Please enter your address or location details for delivery.</p>
+                    <p class="lang-am" style="display:none;">እባክዎ ለመላኪያ አድራሻዎን ወይም ቦታዎን ያስገቡ።</p>
+                    <div class="form-group">
+                        <label class="lang-en">Address / Location</label>
+                        <label class="lang-am" style="display:none;">አድራሻ / ቦታ</label>
+                        <input type="text" id="manualAddress" placeholder="123 Main St, Toronto" />
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-modal btn-save" id="manualSaveBtn"><i class="fas fa-check"></i> <span class="lang-en">Save</span><span class="lang-am" style="display:none;">አስቀምጥ</span></button>
+                        <button class="btn-modal btn-cancel" id="manualCancelBtn"><i class="fas fa-times"></i> <span class="lang-en">Cancel</span><span class="lang-am" style="display:none;">ሰርዝ</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+            SHOP HEADER
+            ========================================================== -->
+            <div class="shop-header">
+                <div class="shop-title">
+                    <i class="fas fa-store-alt"></i> <span class="lang-en">Products</span><span class="lang-am" style="display:none;">ምርቶች</span>
+                    <small class="lang-en">Click to select, adjust quantity</small>
+                    <small class="lang-am" style="display:none;">ለመምረጥ ይጫኑ፣ መጠን ያስተካክሉ</small>
+                </div>
+                <div class="bulk-actions">
+                    <button class="btn-bulk select-all" id="selectAllBtn"><i class="fas fa-check-double"></i> <span class="lang-en">Select All</span><span class="lang-am" style="display:none;">ሁሉንም ምረጥ</span></button>
+                    <button class="btn-bulk deselect-all" id="deselectAllBtn"><i class="fas fa-times"></i> <span class="lang-en">Deselect All</span><span class="lang-am" style="display:none;">ሁሉንም አስወግድ</span></button>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+            PRODUCT GRID
+            ========================================================== -->
+            <div class="product-grid" id="productGrid"></div>
+
+            <!-- ==========================================================
+            BAG SELECTION MODAL
+            ========================================================== -->
+            <div class="bag-modal-overlay" id="bagModal">
+                <div class="bag-modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-shopping-bag"></i> <span class="lang-en">Select Bag Size</span><span class="lang-am" style="display:none;">የከረጢት መጠን ይምረጡ</span></h3>
+                        <button class="close-modal-btn" id="closeBagModal">&times;</button>
+                    </div>
+                    <div class="product-info" id="bagProductInfo">
+                        <img id="bagProductImage" src="" alt="Product" />
+                        <div class="info-text">
+                            <span id="bagProductName">Product Name</span>
+                            <span class="sub" id="bagProductCategory">Category</span>
+                        </div>
+                    </div>
+
+                    <!-- Bag Restriction Message -->
+                    <div id="bagRestrictionMessage" style="display:none; background:var(--danger); color:white; padding:0.8rem; border-radius:var(--radius-sm); margin-bottom:1rem; text-align:center;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span class="lang-en">⚠️ This item cannot be placed in a bag.</span>
+                        <span class="lang-am" style="display:none;">⚠️ ይህ ዕቃ በከረጢት ውስጥ መቀመጥ አይችልም።</span>
+                    </div>
+
+                    <p style="font-weight:600; margin-bottom:0.5rem; color:var(--text-secondary);">
+                        <span class="lang-en">Choose your bag size:</span>
+                        <span class="lang-am" style="display:none;">የከረጢት መጠን ይምረጡ:</span>
+                    </p>
+                    <div class="bag-options" id="bagOptions">
+                        <div class="bag-option selected" data-size="small" data-multiplier="0.5">
+                            <div style="display:flex; align-items:center; gap:0.8rem;">
+                                <div class="bag-radio"></div>
+                                <div class="bag-info">
+                                    <span class="bag-name lang-en">Small</span>
+                                    <span class="bag-name lang-am" style="display:none;">ትንሽ</span>
+                                    <span class="bag-size">8" × 10"</span>
+                                </div>
+                            </div>
+                            <span class="bag-price">$<span class="bag-price-value">0.50</span></span>
+                        </div>
+                        <div class="bag-option" data-size="medium" data-multiplier="1.0">
+                            <div style="display:flex; align-items:center; gap:0.8rem;">
+                                <div class="bag-radio"></div>
+                                <div class="bag-info">
+                                    <span class="bag-name lang-en">Medium</span>
+                                    <span class="bag-name lang-am" style="display:none;">መካከለኛ</span>
+                                    <span class="bag-size">10" × 14"</span>
+                                </div>
+                            </div>
+                            <span class="bag-price">$<span class="bag-price-value">1.00</span></span>
+                        </div>
+                        <div class="bag-option" data-size="large" data-multiplier="2.0">
+                            <div style="display:flex; align-items:center; gap:0.8rem;">
+                                <div class="bag-radio"></div>
+                                <div class="bag-info">
+                                    <span class="bag-name lang-en">Large</span>
+                                    <span class="bag-name lang-am" style="display:none;">ትልቅ</span>
+                                    <span class="bag-size">12" × 18"</span>
+                                </div>
+                            </div>
+                            <span class="bag-price">$<span class="bag-price-value">2.00</span></span>
+                        </div>
+                    </div>
+                    <div class="bag-qty-section">
+                        <label><span class="lang-en">Quantity:</span><span class="lang-am" style="display:none;">ብዛት:</span></label>
+                        <div class="qty-control">
+                            <button id="bagQtyMinus">−</button>
+                            <span class="qty-num" id="bagQtyNum">1</span>
+                            <button id="bagQtyPlus">+</button>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-modal-action btn-add-bag" id="addBagBtn">
+                            <i class="fas fa-plus"></i> <span class="lang-en">Add Bag</span><span class="lang-am" style="display:none;">ከረጢት ጨምር</span>
+                        </button>
+                        <button class="btn-modal-action btn-skip-bag" id="skipBagBtn">
+                            <span class="lang-en">Skip</span><span class="lang-am" style="display:none;">አልፍ</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+            SELECTION PANEL
+            ========================================================== -->
+            <div class="selection-panel" id="selectionPanel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-check-circle"></i> <span class="lang-en">Your Selection</span><span class="lang-am" style="display:none;">የእርስዎ ምርጫ</span></h3>
+                    <span class="count-badge" id="selectionCount">0 <span class="lang-en">selected</span><span class="lang-am" style="display:none;">ተመርጠዋል</span></span>
+                </div>
+                <div class="selected-items-list" id="selectedItemsList">
+                    <p style="color:var(--text-muted); padding:0.5rem 0;" class="lang-en">No products selected yet</p>
+                    <p style="color:var(--text-muted); padding:0.5rem 0; display:none;" class="lang-am">እስካሁን ምርት አልተመረጠም</p>
+                </div>
+                <div class="delivery-summary-box" id="deliverySummaryBox">
+                    <div class="summary-row">
+                        <span class="summary-label lang-en">Subtotal:</span>
+                        <span class="summary-label lang-am" style="display:none;">ድምር:</span>
+                        <span class="summary-value" id="subtotalDisplay">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label lang-en">Under $50 → $10–$15 delivery</span>
+                        <span class="summary-label lang-am" style="display:none;">ከ$50 በታች → $10–$15 መላኪያ</span>
+                        <span class="summary-value" id="deliveryDisplay">$0.00</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span class="summary-label lang-en">Total:</span>
+                        <span class="summary-label lang-am" style="display:none;">ጠቅላላ:</span>
+                        <span class="summary-value" id="totalDisplay">$0.00</span>
+                    </div>
+                </div>
+                <div class="panel-actions-row">
+                    <div class="left-group">
+                        <button class="btn-action btn-clear" id="clearPanelBtn"><i class="fas fa-times"></i> <span class="lang-en">Clear</span><span class="lang-am" style="display:none;">አጽዳ</span></button>
+                        <button class="btn-action btn-chat" id="chatPanelBtn"><i class="fab fa-whatsapp"></i> <span class="lang-en">Go to Chat</span><span class="lang-am" style="display:none;">ወደ ውይይት</span></button>
+                    </div>
+                    <button class="btn-action btn-proceed" id="proceedBtn"><i class="fas fa-arrow-right"></i> <span class="lang-en">Proceed to Contact</span><span class="lang-am" style="display:none;">ወደ እውቂያ ቀጥል</span></button>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+            BUSINESS CARD
+            ========================================================== -->
+            <div class="shop-header" style="margin-top:0;">
+                <div class="shop-title">
+                    <i class="fas fa-id-card"></i> <span class="lang-en">Business Card</span><span class="lang-am" style="display:none;">የንግድ ካርድ</span>
+                    <small class="lang-en">Good Products. Fair Prices. Great Service.</small>
+                    <small class="lang-am" style="display:none;">ጥሩ ምርቶች። ተመጣጣኝ ዋጋ። ጥሩ አገልግሎት።</small>
+                </div>
+            </div>
+
+            <div class="business-card" id="contact">
+                <div class="card-front">
+                    <div class="card-logo">
+                        <span class="lang-en">KOBA</span><span class="lang-am" style="display:none;">ኮባ</span>
+                        <span class="gold lang-en">CONVENIENCE</span>
+                        <span class="gold lang-am" style="display:none;">ምቹ መደብር</span>
+                    </div>
+                    <div class="card-sub lang-en">Good Products. Fair Prices. Great Service.</div>
+                    <div class="card-sub lang-am" style="display:none;">ጥሩ ምርቶች። ተመጣጣኝ ዋጋ። ጥሩ አገልግሎት።</div>
+                    <div class="card-divider"></div>
+                    <div class="card-details">
+                        <p><i class="fas fa-store"></i> 99 Howard Street, Unit 1</p>
+                        <p><i class="fas fa-city"></i> Toronto, ON M4X 1K1</p>
+                        <p><i class="fas fa-phone"></i> +1 (437) 879-3601</p>
+                        <p><i class="fas fa-envelope"></i> info@kobastore.com</p>
+                        <p><i class="fas fa-clock"></i> <span class="lang-en">Mon–Sun: 8:00 AM – 10:00 PM</span><span class="lang-am" style="display:none;">ሰኞ–እሑድ: 8:00 ጠዋት – 10:00 ማታ</span></p>
+                    </div>
+                </div>
+                <div class="card-back">
+                    <div class="tagline lang-en">"Good Products. Fair Prices. Great Service."</div>
+                    <div class="tagline lang-am" style="display:none;">"ጥሩ ምርቶች። ተመጣጣኝ ዋጋ። ጥሩ አገልግሎት።"</div>
+                    <div class="tagline-small lang-en">Rooted in Our Community, Serving Everyone.</div>
+                    <div class="tagline-small lang-am" style="display:none;">በማህበረሰባችን ውስጥ ሥር ሰድደን፣ ለሁሉም እናገለግላለን።</div>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@koba2995" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.facebook.com/share/1bLNfxHKbV/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div style="margin-top:0.8rem; font-size:0.7rem; opacity:0.6;">
+                        <i class="fas fa-store-alt"></i> <span class="lang-en">Your Neighborhood Store</span><span class="lang-am" style="display:none;">የአካባቢዎ መደብር</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ==========================================================
+        CONTACT PAGE
+        ========================================================== -->
+        <div class="page" id="contactPage">
+            <div class="contact-page-wrapper">
+                <div class="contact-header">
+                    <h2><i class="fas fa-headset"></i> <span class="lang-en">Contact &amp; Order</span><span class="lang-am" style="display:none;">አግኙን &amp; ትዕዛዝ</span></h2>
+                    <button class="btn-back-shop" id="backToHomeBtn"><i class="fas fa-arrow-left"></i> <span class="lang-en">Back to Shop</span><span class="lang-am" style="display:none;">ወደ መደብር ተመለስ</span></button>
+                </div>
+                <div class="contact-grid-layout">
+                    <div class="contact-sidebar">
+                        <div class="order-preview-card">
+                            <img class="preview-img" id="contactPreviewImage" src="https://th.bing.com/th/id/OIP.3wF5dXGkLXV9V8i6VjUoJAHaHa?w=180&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Preview" />
+                            <div class="preview-text">
+                                <span id="contactNameDisplay" class="lang-en">Selected Products</span>
+                                <span id="contactNameDisplayAm" class="lang-am" style="display:none;">የተመረጡ ምርቶች</span>
+                                <span class="sub-text" id="contactPriceDisplay">0 items</span>
+                            </div>
+                        </div>
+                        <div class="delivery-rules-box">
+                            <strong class="lang-en">🚚 Delivery Rules:</strong>
+                            <strong class="lang-am" style="display:none;">🚚 የመላኪያ ደንቦች:</strong><br />
+                            <span class="lang-en">Orders $50+ → $5 delivery</span>
+                            <span class="lang-am" style="display:none;">ከ$50 በላይ → $5 መላኪያ</span><br />
+                            <span class="lang-en">Orders under $50 → $10–$15 delivery</span>
+                            <span class="lang-am" style="display:none;">ከ$50 በታች → $10–$15 መላኪያ</span><br />
+                            <span class="lang-en">Urgent/same-day → $15–$25</span>
+                            <span class="lang-am" style="display:none;">አስቸኳይ / በዚያው ቀን → $15–$25</span>
+                        </div>
+                        <div class="store-info">
+                            <p><i class="fas fa-store"></i> <span class="lang-en">Koba Convenience · 24/7 support</span><span class="lang-am" style="display:none;">ኮባ ምቹ መደብር · 24/7 ድጋፍ</span></p>
+                            <p style="margin-top:0.3rem; font-size:0.8rem;">
+                                <i class="fas fa-phone"></i> +1 (437) 879-3601<br />
+                                <i class="fas fa-envelope"></i> info@kobastore.com<br />
+                                <i class="fas fa-map-pin"></i> 99 Howard St, Unit 1, Toronto, ON M4X 1K1
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-form-wrapper">
+                        <h3><i class="fab fa-whatsapp" style="color:#25D366;"></i> <span class="lang-en">Order via WhatsApp</span><span class="lang-am" style="display:none;">በዋትሳፕ ትዕዛዝ ያስገቡ</span></h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label class="lang-en">Your name</label>
+                                <label class="lang-am" style="display:none;">ስም</label>
+                                <input type="text" id="customerName" placeholder="John Doe" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="lang-en">Phone number</label>
+                                <label class="lang-am" style="display:none;">ስልክ ቁጥር</label>
+                                <input type="tel" id="customerPhone" placeholder="+1 437 879 3601" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="lang-en">Message / Notes</label>
+                                <label class="lang-am" style="display:none;">መልእክት / ማስታወሻ</label>
+                                <textarea id="customerNotes" placeholder="Delivery address, special requests..."></textarea>
+                            </div>
+                            <div class="message-preview-box" id="messagePreviewBox">
+                                <span style="color:var(--text-muted);" class="lang-en">No products selected</span>
+                                <span style="color:var(--text-muted); display:none;" class="lang-am">ምርት አልተመረጠም</span>
+                            </div>
+                            <button type="submit" class="btn-submit-wa" id="whatsappSubmitBtn">
+                                <i class="fab fa-whatsapp"></i> <span class="lang-en">Send via WhatsApp</span><span class="lang-am" style="display:none;">በዋትሳፕ ላክ</span>
+                            </button>
+                            <p class="wa-note"><i class="fas fa-lock"></i> <span class="lang-en">Messages sent to +1 (437) 879-3601</span><span class="lang-am" style="display:none;">መልእክቶች ወደ +1 (437) 879-3601 ይላካሉ</span></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================================
+        FOOTER
+        ========================================================== -->
+        <footer class="site-footer">
+            <div class="footer-logo">
+                <span class="lang-en">KOBA</span><span class="lang-am" style="display:none;">ኮባ</span>
+                <span class="gold lang-en">CONVENIENCE</span>
+                <span class="gold lang-am" style="display:none;">ምቹ መደብር</span>
+            </div>
+            <div class="footer-tagline lang-en">Good Products. Fair Prices. Great Service.</div>
+            <div class="footer-tagline lang-am" style="display:none;">ጥሩ ምርቶች። ተመጣጣኝ ዋጋ። ጥሩ አገልግሎት።</div>
+            <div class="footer-address">
+                <i class="fas fa-location-dot"></i> 99 Howard Street, Unit 1, Toronto, ON M4X 1K1
+            </div>
+            <div class="map-container" onclick="window.open('https://www.google.com/maps?q=99+Howard+Street+Toronto+ON+M4X+1K1','_blank')">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2386.1270121926464!2d-79.3715127!3d43.6710808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb50dbe7351d%3A0xc1655dfad0a42f07!2s99%20Howard%20St%2C%20Toronto%2C%20ON%20M4X%201K1%2C%20Canada!5e1!3m2!1sen!2set!4v1788966796415!5m2!1sen!2set" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                <div class="map-overlay-label"><i class="fas fa-map-pin"></i> 99 Howard St, Toronto</div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-home"></i> <span class="lang-en">Home</span><span class="lang-am" style="display:none;">መነሻ</span></a>
+                <a href="#"><i class="fas fa-envelope"></i> <span class="lang-en">Contact</span><span class="lang-am" style="display:none;">አግኙን</span></a>
+                <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="#"><i class="fas fa-map-pin"></i> <span class="lang-en">Location</span><span class="lang-am" style="display:none;">ቦታ</span></a>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 <span class="lang-en">Koba Convenience Store</span><span class="lang-am" style="display:none;">ኮባ ምቹ መደብር</span>. <span class="lang-en">Rooted in Our Community, Serving Everyone.</span><span class="lang-am" style="display:none;">በማህበረሰባችን ውስጥ ሥር ሰድደን፣ ለሁሉም እናገለግላለን።</span> 🇪🇹🇨🇦
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ==========================================================
+    FIXED BOTTOM BAR
+    ========================================================== -->
+    <div class="fixed-bottom-bar" id="bottomBar">
+        <div class="bar-left">
+            <div class="cart-icon-wrap">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="bottomBadge">0</span>
+            </div>
+            <span class="bar-summary">
+                <strong id="bottomItemCount">0</strong> <span class="lang-en">item(s)</span><span class="lang-am" style="display:none;">ዕቃ(ዎች)</span>
+            </span>
+            <span class="bar-total" id="bottomTotal">$0.00</span>
+        </div>
+        <div class="bar-right">
+            <button class="btn-bar btn-bar-clear" id="bottomClearBtn"><i class="fas fa-times"></i> <span class="lang-en">Clear</span><span class="lang-am" style="display:none;">አጽዳ</span></button>
+            <button class="btn-bar btn-bar-chat" id="bottomChatBtn"><i class="fab fa-whatsapp"></i> <span class="lang-en">Chat</span><span class="lang-am" style="display:none;">ውይይት</span></button>
+            <button class="btn-bar btn-bar-contact" id="bottomContactBtn"><i class="fas fa-arrow-right"></i> <span class="lang-en">Contact</span><span class="lang-am" style="display:none;">አግኙን</span></button>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+    JAVASCRIPT
+    ========================================================== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // LANGUAGE MANAGEMENT
+            // ============================================================
+            let currentLang = 'en';
+
+            function setLanguage(lang) {
+                currentLang = lang;
+                document.querySelectorAll('.lang-btn').forEach(function(btn) {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+                document.querySelectorAll('.lang-en').forEach(function(el) {
+                    el.style.display = lang === 'en' ? '' : 'none';
+                });
+                document.querySelectorAll('.lang-am').forEach(function(el) {
+                    el.style.display = lang === 'am' ? '' : 'none';
+                });
+                var searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.placeholder = lang === 'en' ? 'Search products...' : 'ምርቶችን ይፈልጉ...';
+                }
+                localStorage.setItem('koba_language', lang);
+                updateBagModalLanguage();
+                renderProducts();
+                updateAll();
+            }
+
+            function updateBagModalLanguage() {
+                var bagOptions = document.querySelectorAll('.bag-option');
+                var names = [
+                    { en: 'Small', am: 'ትንሽ' },
+                    { en: 'Medium', am: 'መካከለኛ' },
+                    { en: 'Large', am: 'ትልቅ' }
+                ];
+                bagOptions.forEach(function(opt, i) {
+                    var nameEl = opt.querySelector('.bag-name');
+                    if (nameEl) {
+                        nameEl.textContent = currentLang === 'en' ? names[i].en : names[i].am;
+                    }
+                });
+            }
+
+            // ============================================================
+            // CONFIGURATION
+            // ============================================================
+            var CONFIG = {
+                WHATSAPP_NUMBER: '14378793601',
+                STORAGE_KEYS: {
+                    SELECTED: 'koba_selected',
+                    THEME: 'koba_theme',
+                    LOCATION: 'koba_location',
+                    LOCATION_TEXT: 'koba_location_text',
+                    LANGUAGE: 'koba_language'
+                }
+            };
+
+            // ============================================================
+            // PRODUCT DATA WITH PRICES
+            // ============================================================
+            var PRODUCTS = [
+                { id: 1, nameEn: 'Teff', nameAm: 'ጤፍ', category: 'Habesha Groceries', price: 8.99, image: 'image/1.png' },
+                { id: 2, nameEn: 'Shiro Powder', nameAm: 'ሽሮ', category: 'Habesha Groceries', price: 6.49, image: 'image/2.jpe' },
+                { id: 3, nameEn: 'Kolo', nameAm: 'ኮሎ', category: 'Habesha Groceries', price: 4.99, image: 'image/3.jpe' },
+                { id: 4, nameEn: 'Kibbeh', nameAm: 'የሀበሻ ቅቤ', category: 'Habesha Groceries', price: 12.99, image: 'image/4.jpe' },
+                { id: 5, nameEn: 'Fresh Injera', nameAm: 'ትኩስ እንጀራ', category: 'Fresh Injera', price: 5.99, image: 'image/5.jpe', noBag: true },
+                { id: 7, nameEn: 'Ethiopian Coffee', nameAm: 'የኢትዮጵያ ቡና', category: 'Coffee & Tea', price: 14.99, image: 'image/7.jpe' },
+                { id: 8, nameEn: 'Tea', nameAm: 'ሻይ', category: 'Coffee & Tea', price: 3.99, image: 'image/8.jpe' },
+                { id: 9, nameEn: 'Berbere', nameAm: 'በርበሬ', category: 'Berbere & Spices', price: 7.99, image: 'image/9.jpe' },
+                { id: 10, nameEn: 'Mitmita', nameAm: 'ሚጥሚጣ', category: 'Berbere & Spices', price: 8.49, image: 'image/10.png' },
+                { id: 11, nameEn: 'Spice Mix', nameAm: 'የተለያዩ ቅመሞች', category: 'Berbere & Spices', price: 9.99, image: 'image/11.jpe' },
+                { id: 15, nameEn: 'Fruit Juice', nameAm: 'የፍራፍሬ ጭማቂ', category: 'Drinks & Snacks', price: 3.49, image: 'image/15.jpe', noBag: true },
+                { id: 16, nameEn: 'Snack Mix', nameAm: 'የተለያዩ መክሰስ', category: 'Drinks & Snacks', price: 2.99, image: 'image/16.png' },
+                { id: 17, nameEn: 'Energy Drinks', nameAm: 'የኃይል መጠጦች', category: 'Drinks & Snacks', price: 3.99, image: 'image/17.png', noBag: true },
+            ];
+
+            // ============================================================
+            // STATE
+            // ============================================================
+            var state = {
+                selected: [],
+                location: null,
+                locationText: '',
+                locationShared: false,
+                theme: 'light',
+                currentPage: 'home',
+                searchTerm: '',
+                pendingProductId: null
+            };
+
+            // ============================================================
+            // DOM REFS
+            // ============================================================
+            var DOM = {
+                pages: {
+                    home: document.getElementById('homePage'),
+                    contact: document.getElementById('contactPage')
+                },
+                nav: {
+                    home: document.getElementById('homeNavBtn'),
+                    contact: document.getElementById('contactNavBtn'),
+                    back: document.getElementById('backToHomeBtn'),
+                    theme: document.getElementById('themeToggle')
+                },
+                products: document.getElementById('productGrid'),
+                search: document.getElementById('searchInput'),
+                location: {
+                    status: document.getElementById('locStatus'),
+                    shareBtn: document.getElementById('locShareBtn'),
+                    manualBtn: document.getElementById('locManualBtn'),
+                    clearBtn: document.getElementById('locClearBtn'),
+                    bar: document.getElementById('locationStatusBar')
+                },
+                modal: {
+                    overlay: document.getElementById('manualLocationModal'),
+                    address: document.getElementById('manualAddress'),
+                    save: document.getElementById('manualSaveBtn'),
+                    cancel: document.getElementById('manualCancelBtn')
+                },
+                bagModal: {
+                    overlay: document.getElementById('bagModal'),
+                    close: document.getElementById('closeBagModal'),
+                    productImage: document.getElementById('bagProductImage'),
+                    productName: document.getElementById('bagProductName'),
+                    productCategory: document.getElementById('bagProductCategory'),
+                    restrictionMessage: document.getElementById('bagRestrictionMessage'),
+                    options: document.getElementById('bagOptions'),
+                    qtyNum: document.getElementById('bagQtyNum'),
+                    qtyMinus: document.getElementById('bagQtyMinus'),
+                    qtyPlus: document.getElementById('bagQtyPlus'),
+                    addBtn: document.getElementById('addBagBtn'),
+                    skipBtn: document.getElementById('skipBagBtn')
+                },
+                selection: {
+                    panel: document.getElementById('selectionPanel'),
+                    count: document.getElementById('selectionCount'),
+                    list: document.getElementById('selectedItemsList'),
+                    subtotal: document.getElementById('subtotalDisplay'),
+                    delivery: document.getElementById('deliveryDisplay'),
+                    total: document.getElementById('totalDisplay'),
+                    summary: document.getElementById('deliverySummaryBox'),
+                    clear: document.getElementById('clearPanelBtn'),
+                    chat: document.getElementById('chatPanelBtn'),
+                    proceed: document.getElementById('proceedBtn'),
+                    selectAll: document.getElementById('selectAllBtn'),
+                    deselectAll: document.getElementById('deselectAllBtn')
+                },
+                contact: {
+                    previewImage: document.getElementById('contactPreviewImage'),
+                    nameDisplay: document.getElementById('contactNameDisplay'),
+                    nameDisplayAm: document.getElementById('contactNameDisplayAm'),
+                    priceDisplay: document.getElementById('contactPriceDisplay'),
+                    form: document.getElementById('contactForm'),
+                    name: document.getElementById('customerName'),
+                    phone: document.getElementById('customerPhone'),
+                    notes: document.getElementById('customerNotes'),
+                    messagePreview: document.getElementById('messagePreviewBox'),
+                    submitBtn: document.getElementById('whatsappSubmitBtn')
+                },
+                bottomBar: {
+                    bar: document.getElementById('bottomBar'),
+                    badge: document.getElementById('bottomBadge'),
+                    count: document.getElementById('bottomItemCount'),
+                    total: document.getElementById('bottomTotal'),
+                    clear: document.getElementById('bottomClearBtn'),
+                    chat: document.getElementById('bottomChatBtn'),
+                    contact: document.getElementById('bottomContactBtn')
+                },
+                lang: {
+                    buttons: document.querySelectorAll('.lang-btn')
+                }
+            };
+
+            var selectedBagSize = 'small';
+            var selectedBagMultiplier = 0.5;
+            var bagQty = 1;
+            var currentProductPrice = 0;
+            var currentProductNoBag = false;
+
+            // ============================================================
+            // UTILITY FUNCTIONS
+            // ============================================================
+            function getProduct(id) {
+                return PRODUCTS.find(function(p) { return p.id === id; });
+            }
+
+            function getProductName(id) {
+                var p = getProduct(id);
+                if (!p) return '';
+                return currentLang === 'en' ? p.nameEn : p.nameAm;
+            }
+
+            function getProductPrice(id) {
+                var p = getProduct(id);
+                if (!p) return 0;
+                return p.price || 0;
+            }
+
+            function getProductNoBag(id) {
+                var p = getProduct(id);
+                if (!p) return false;
+                return p.noBag || false;
+            }
+
+            function getTotalItems() {
+                return state.selected.reduce(function(sum, item) { return sum + item.qty; }, 0);
+            }
+
+            function getSubtotal() {
+                return state.selected.reduce(function(sum, item) {
+                    var price = item.bagPrice || getProductPrice(item.id) || 0;
+                    return sum + price * item.qty;
+                }, 0);
+            }
+
+            function getDeliveryCost(subtotal) {
+                if (subtotal === 0) return 0;
+                if (subtotal >= 50) return 5;
+                if (subtotal >= 30) return 10;
+                return 15;
+            }
+
+            function saveState() {
+                try {
+                    localStorage.setItem(CONFIG.STORAGE_KEYS.SELECTED, JSON.stringify(state.selected));
+                    localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, state.theme);
+                    if (state.location) {
+                        localStorage.setItem(CONFIG.STORAGE_KEYS.LOCATION, JSON.stringify(state.location));
+                    }
+                    if (state.locationText) {
+                        localStorage.setItem(CONFIG.STORAGE_KEYS.LOCATION_TEXT, state.locationText);
+                    }
+                } catch (e) { /* ignore */ }
+            }
+
+            function loadState() {
+                try {
+                    var saved = localStorage.getItem(CONFIG.STORAGE_KEYS.SELECTED);
+                    if (saved) state.selected = JSON.parse(saved);
+
+                    var theme = localStorage.getItem(CONFIG.STORAGE_KEYS.THEME);
+                    if (theme) state.theme = theme;
+
+                    var loc = localStorage.getItem(CONFIG.STORAGE_KEYS.LOCATION);
+                    if (loc) {
+                        state.location = JSON.parse(loc);
+                        state.locationShared = true;
+                    }
+
+                    var locText = localStorage.getItem(CONFIG.STORAGE_KEYS.LOCATION_TEXT);
+                    if (locText) state.locationText = locText;
+
+                    var lang = localStorage.getItem(CONFIG.STORAGE_KEYS.LANGUAGE);
+                    if (lang) setLanguage(lang);
+                } catch (e) { /* ignore */ }
+            }
+
+            // ============================================================
+            // LOCATION FUNCTIONS
+            // ============================================================
+            function updateLocationStatus(type, message, details) {
+                var el = DOM.location.status;
+                el.className = 'loc-status';
+
+                var icon = '📍';
+                var displayMessage = message || (currentLang === 'en' ? 'Not shared' : 'አልተጋራም');
+
+                if (type === 'shared') {
+                    el.classList.add('shared');
+                    icon = '✅';
+                    if (details) {
+                        displayMessage = details;
+                    }
+                    DOM.location.clearBtn.style.display = 'inline-flex';
+                } else if (type === 'error') {
+                    el.classList.add('error');
+                    icon = '⚠️';
+                    DOM.location.clearBtn.style.display = 'none';
+                } else if (type === 'pending') {
+                    el.classList.add('pending');
+                    icon = '⏳';
+                    DOM.location.clearBtn.style.display = 'none';
+                } else {
+                    el.classList.add('default');
+                    icon = '📍';
+                    DOM.location.clearBtn.style.display = 'none';
+                }
+
+                el.innerHTML = '<span class="status-icon">' + icon + '</span> ' + displayMessage;
+            }
+
+            function setLocation(lat, lng, address) {
+                state.location = { lat: lat, lng: lng };
+                if (address) state.locationText = address;
+                state.locationShared = true;
+                var displayText = address || lat.toFixed(6) + ', ' + lng.toFixed(6);
+                updateLocationStatus('shared', currentLang === 'en' ? 'Shared' : 'ተጋርቷል', displayText);
+                saveState();
+                updateMessagePreview();
+                return state.location;
+            }
+
+            function setLocationManual(address) {
+                if (!address || address.trim() === '') {
+                    alert(currentLang === 'en' ? 'Please enter a valid address.' : 'እባክዎ ትክክለኛ አድራሻ ያስገቡ።');
+                    return false;
+                }
+                state.locationText = address.trim();
+                state.location = { lat: 0, lng: 0, manual: true };
+                state.locationShared = true;
+                updateLocationStatus('shared', currentLang === 'en' ? 'Shared' : 'ተጋርቷል', address.trim());
+                saveState();
+                updateMessagePreview();
+                closeManualModal();
+                return true;
+            }
+
+            function clearLocation() {
+                state.location = null;
+                state.locationText = '';
+                state.locationShared = false;
+                updateLocationStatus('default', currentLang === 'en' ? 'Not shared' : 'አልተጋራም');
+                DOM.location.clearBtn.style.display = 'none';
+                localStorage.removeItem(CONFIG.STORAGE_KEYS.LOCATION);
+                localStorage.removeItem(CONFIG.STORAGE_KEYS.LOCATION_TEXT);
+                updateMessagePreview();
+            }
+
+            function getGPSLocation() {
+                if (!navigator.geolocation) {
+                    updateLocationStatus('error', currentLang === 'en' ? 'GPS not supported' : 'ጂፒኤስ አይደገፍም');
+                    alert(currentLang === 'en' ? '❌ Your browser does not support GPS.' :
+                        '❌ የእርስዎ አሳሽ ጂፒኤስ አይደግፍም።');
+                    return Promise.reject(new Error('Geolocation not supported'));
+                }
+
+                updateLocationStatus('pending', currentLang === 'en' ? 'Getting GPS...' : 'ጂፒኤስ በማግኘት ላይ...');
+
+                return new Promise(function(resolve, reject) {
+                    navigator.geolocation.getCurrentPosition(
+                        function(pos) {
+                            var latitude = pos.coords.latitude;
+                            var longitude = pos.coords.longitude;
+                            var location = setLocation(latitude, longitude);
+                            alert(currentLang === 'en' ? '✅ GPS location shared successfully!' :
+                                '✅ ቦታዎ በተሳካ ሁኔታ ተጋርቷል!');
+                            resolve(location);
+                        },
+                        function(err) {
+                            var msg = currentLang === 'en' ? 'GPS error' : 'የጂፒኤስ ስህተት';
+                            if (err.code === 1) msg = currentLang === 'en' ? 'Permission denied' : 'ፈቃድ ተከልክሏል';
+                            else if (err.code === 2) msg = currentLang === 'en' ? 'Signal unavailable' :
+                                'ምልክት አልተገኘም';
+                            else if (err.code === 3) msg = currentLang === 'en' ? 'GPS timeout' : 'ጊዜ አልፏል';
+                            updateLocationStatus('error', msg);
+                            alert((currentLang === 'en' ? '❌ GPS error:' : '❌ የጂፒኤስ ስህተት:') + ' ' + msg);
+                            reject(err);
+                        }, {
+                            enableHighAccuracy: true,
+                            timeout: 20000,
+                            maximumAge: 0
+                        }
+                    );
+                });
+            }
+
+            // ============================================================
+            // MODAL FUNCTIONS
+            // ============================================================
+            function openManualModal() {
+                DOM.modal.overlay.classList.add('active');
+                DOM.modal.address.value = state.locationText || '';
+                DOM.modal.address.focus();
+            }
+
+            function closeManualModal() {
+                DOM.modal.overlay.classList.remove('active');
+            }
+
+            // ============================================================
+            // BAG MODAL FUNCTIONS
+            // ============================================================
+            function openBagModal(productId) {
+                state.pendingProductId = productId;
+                var product = getProduct(productId);
+                if (!product) return;
+
+                currentProductPrice = product.price || 0;
+                currentProductNoBag = product.noBag || false;
+
+                selectedBagSize = 'small';
+                selectedBagMultiplier = 0.5;
+                bagQty = 1;
+
+                DOM.bagModal.productImage.src = product.image;
+                DOM.bagModal.productName.textContent = currentLang === 'en' ? product.nameEn : product.nameAm;
+                DOM.bagModal.productCategory.textContent = product.category;
+
+                // Show/hide restriction message
+                if (currentProductNoBag) {
+                    DOM.bagModal.restrictionMessage.style.display = 'block';
+                    // Disable bag options
+                    DOM.bagModal.options.querySelectorAll('.bag-option').forEach(function(opt) {
+                        opt.style.opacity = '0.5';
+                        opt.style.cursor = 'not-allowed';
+                    });
+                } else {
+                    DOM.bagModal.restrictionMessage.style.display = 'none';
+                    DOM.bagModal.options.querySelectorAll('.bag-option').forEach(function(opt) {
+                        opt.style.opacity = '1';
+                        opt.style.cursor = 'pointer';
+                    });
+                }
+
+                DOM.bagModal.qtyNum.textContent = '1';
+                updateBagPrices();
+
+                document.querySelectorAll('.bag-option').forEach(function(opt) {
+                    opt.classList.remove('selected');
+                    if (opt.dataset.size === 'small') {
+                        opt.classList.add('selected');
+                    }
+                });
+
+                DOM.bagModal.overlay.classList.add('active');
+            }
+
+            function updateBagPrices() {
+                var basePrice = currentProductPrice;
+                var multipliers = {
+                    'small': 0.5,
+                    'medium': 1.0,
+                    'large': 2.0
+                };
+
+                document.querySelectorAll('.bag-option').forEach(function(opt) {
+                    var size = opt.dataset.size;
+                    var multiplier = multipliers[size] || 0.5;
+                    var price = basePrice * multiplier;
+                    var priceEl = opt.querySelector('.bag-price-value');
+                    if (priceEl) {
+                        priceEl.textContent = price.toFixed(2);
+                    }
+                });
+            }
+
+            function closeBagModal() {
+                DOM.bagModal.overlay.classList.remove('active');
+                state.pendingProductId = null;
+            }
+
+            function selectBagSize(size, multiplier) {
+                selectedBagSize = size;
+                selectedBagMultiplier = multiplier;
+                document.querySelectorAll('.bag-option').forEach(function(opt) {
+                    opt.classList.toggle('selected', opt.dataset.size === size);
+                });
+            }
+
+            function updateBagQty(delta) {
+                bagQty = Math.max(1, Math.min(99, bagQty + delta));
+                DOM.bagModal.qtyNum.textContent = bagQty;
+            }
+
+            function addBagToCart() {
+                if (!state.pendingProductId) return;
+
+                // If product cannot use bags, skip bag and just add product
+                if (currentProductNoBag) {
+                    var productId = state.pendingProductId;
+                    var idx = state.selected.findIndex(function(s) {
+                        return s.id === productId && !s.isBag;
+                    });
+                    if (idx > -1) {
+                        state.selected[idx].qty += bagQty;
+                    } else {
+                        state.selected.push({ id: productId, qty: bagQty, isBag: false });
+                    }
+                    closeBagModal();
+                    updateAll();
+                    return;
+                }
+
+                var bagPrice = currentProductPrice * selectedBagMultiplier;
+                var bagName = currentLang === 'en' ?
+                    'Bag (' + selectedBagSize + ')' :
+                    'ከረጢት (' + (selectedBagSize === 'small' ? 'ትንሽ' : selectedBagSize === 'medium' ? 'መካከለኛ' : 'ትልቅ') + ')';
+
+                // Add bag to cart
+                var existingBagIdx = state.selected.findIndex(function(s) {
+                    return s.bagSize === selectedBagSize && s.isBag === true;
+                });
+
+                if (existingBagIdx > -1) {
+                    state.selected[existingBagIdx].qty += bagQty;
+                } else {
+                    state.selected.push({
+                        id: 999 + Date.now(),
+                        qty: bagQty,
+                        isBag: true,
+                        bagSize: selectedBagSize,
+                        bagPrice: bagPrice,
+                        bagName: bagName,
+                        image: 'https://th.bing.com/th/id/OIP.8KgqKc4x2X5XVGFx5r3YagHaHa?w=180&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3'
+                    });
+                }
+
+                // Add product to cart
+                var productId = state.pendingProductId;
+                var idx = state.selected.findIndex(function(s) {
+                    return s.id === productId && !s.isBag;
+                });
+                if (idx > -1) {
+                    state.selected[idx].qty += bagQty;
+                } else {
+                    state.selected.push({ id: productId, qty: bagQty, isBag: false });
+                }
+
+                closeBagModal();
+                updateAll();
+            }
+
+            // ============================================================
+            // RENDER PRODUCTS
+            // ============================================================
+            function renderProducts() {
+                var filtered = PRODUCTS.filter(function(p) {
+                    var search = state.searchTerm.toLowerCase();
+                    var name = currentLang === 'en' ? p.nameEn.toLowerCase() : p.nameAm.toLowerCase();
+                    return name.includes(search) || p.category.toLowerCase().includes(search);
+                });
+
+                if (filtered.length === 0) {
+                    DOM.products.innerHTML =
+                        '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:2rem 0;">' +
+                        (currentLang === 'en' ? 'No products found' : 'ምንም ምርት አልተገኘም') + '</p>';
+                    return;
+                }
+
+                var html = '';
+                filtered.forEach(function(p) {
+                    var selected = state.selected.find(function(s) { return s.id === p.id && !s.isBag; });
+                    var qty = selected ? selected.qty : 0;
+                    var isSelected = qty > 0;
+                    var name = currentLang === 'en' ? p.nameEn : p.nameAm;
+                    var price = p.price || 0;
+                    var noBag = p.noBag || false;
+
+                    html += '<div class="product-card' + (isSelected ? ' selected' : '') + '" data-id="' + p.id + '">';
+                    html += '<span class="qty-badge">' + qty + '</span>';
+                    html += '<img class="product-image" src="' + p.image + '" alt="' + name + '" loading="lazy" />';
+                    html += '<h3>' + name + '</h3>';
+                    html += '<span class="category-tag">' + p.category + '</span>';
+                    html += '<div class="product-price">$' + price.toFixed(2) + '</div>';
+                    if (noBag) {
+                        html += '<div style="font-size:0.6rem; color:var(--danger); margin-top:0.1rem;"><i class="fas fa-ban"></i> No bag</div>';
+                    }
+                    html += '<div class="qty-selector">';
+                    html += '<button class="qty-minus" data-id="' + p.id + '">−</button>';
+                    html += '<span class="qty-value">' + (qty || 1) + '</span>';
+                    html += '<button class="qty-plus" data-id="' + p.id + '">+</button>';
+                    html += '</div>';
+                    html += '<span class="select-hint">' + (isSelected ? (currentLang === 'en' ? '✓ Selected' : '✓ ተመርጧል') : (currentLang === 'en' ? 'Click to select' : 'ለመምረጥ ይጫኑ')) + '</span>';
+                    html += '</div>';
+                });
+
+                DOM.products.innerHTML = html;
+
+                DOM.products.querySelectorAll('.product-card').forEach(function(card) {
+                    card.addEventListener('click', function(e) {
+                        if (e.target.closest('.qty-selector')) return;
+                        var id = parseInt(this.dataset.id);
+                        openBagModal(id);
+                    });
+                });
+
+                DOM.products.querySelectorAll('.qty-plus').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var id = parseInt(this.dataset.id);
+                        changeQty(id, 1);
+                    });
+                });
+
+                DOM.products.querySelectorAll('.qty-minus').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var id = parseInt(this.dataset.id);
+                        changeQty(id, -1);
+                    });
+                });
+            }
+
+            // ============================================================
+            // SELECTION FUNCTIONS
+            // ============================================================
+            function changeQty(id, delta) {
+                var idx = state.selected.findIndex(function(s) { return s.id === id && !s.isBag; });
+                if (idx === -1) {
+                    if (delta > 0) {
+                        openBagModal(id);
+                    }
+                } else {
+                    state.selected[idx].qty += delta;
+                    if (state.selected[idx].qty <= 0) {
+                        state.selected.splice(idx, 1);
+                    }
+                    if (state.selected[idx] && state.selected[idx].qty > 99) {
+                        state.selected[idx].qty = 99;
+                    }
+                    updateAll();
+                }
+            }
+
+            function selectAll() {
+                PRODUCTS.forEach(function(p) {
+                    if (!state.selected.find(function(s) { return s.id === p.id && !s.isBag; })) {
+                        state.selected.push({ id: p.id, qty: 1, isBag: false });
+                    }
+                });
+                updateAll();
+            }
+
+            function deselectAll() {
+                state.selected = state.selected.filter(function(s) { return s.isBag; });
+                updateAll();
+            }
+
+            function clearSelection() {
+                state.selected = [];
+                updateAll();
+            }
+
+            // ============================================================
+            // UPDATE UI
+            // ============================================================
+            function updateAll() {
+                renderProducts();
+                updateSelectionPanel();
+                updateBottomBar();
+                updateContactPreview();
+                updateMessagePreview();
+                saveState();
+            }
+
+            function updateSelectionPanel() {
+                var count = getTotalItems();
+
+                if (count === 0) {
+                    DOM.selection.panel.classList.remove('visible');
+                    DOM.selection.list.innerHTML =
+                        '<p style="color:var(--text-muted); padding:0.5rem 0;">' + (currentLang === 'en' ? 'No products selected yet' : 'እስካሁን ምርት አልተመረጠም') + '</p>';
+                    DOM.selection.summary.classList.remove('visible');
+                    return;
+                }
+
+                DOM.selection.panel.classList.add('visible');
+                DOM.selection.count.textContent = count + ' ' + (currentLang === 'en' ? 'selected' : 'ተመርጠዋል');
+
+                var html = '';
+                state.selected.forEach(function(item, index) {
+                    var name = '';
+                    var image = '';
+                    var price = 0;
+                    if (item.isBag) {
+                        name = item.bagName || (currentLang === 'en' ? 'Bag' : 'ከረጢት');
+                        image = item.image ||
+                            'https://th.bing.com/th/id/OIP.8KgqKc4x2X5XVGFx5r3YagHaHa?w=180&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3';
+                        price = item.bagPrice || 0;
+                    } else {
+                        var p = getProduct(item.id);
+                        if (!p) return;
+                        name = currentLang === 'en' ? p.nameEn : p.nameAm;
+                        image = p.image;
+                        price = p.price || 0;
+                    }
+                    html += '<div class="selected-item-row" data-index="' + index + '">';
+                    html += '<div class="item-info">';
+                    html += '<span class="item-name"><img src="' + image + '" alt="' + name + '" />' + name + '</span>';
+                    html += '<span>×</span>';
+                    html += '<div class="item-qty-control">';
+                    html += '<button class="panel-qty-minus" data-index="' + index + '">−</button>';
+                    html += '<span class="qty-num">' + item.qty + '</span>';
+                    html += '<button class="panel-qty-plus" data-index="' + index + '">+</button>';
+                    html += '</div>';
+                    html += '<span style="color:var(--accent); font-weight:700;">$' + (price * item.qty).toFixed(2) + '</span>';
+                    html += '</div>';
+                    html += '<button class="btn-remove-item" data-index="' + index + '"><i class="fas fa-times-circle"></i></button>';
+                    html += '</div>';
+                });
+
+                DOM.selection.list.innerHTML = html;
+
+                DOM.selection.list.querySelectorAll('.panel-qty-plus').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var idx = parseInt(this.dataset.index);
+                        if (state.selected[idx]) {
+                            state.selected[idx].qty += 1;
+                            if (state.selected[idx].qty > 99) state.selected[idx].qty = 99;
+                            updateAll();
+                        }
+                    });
+                });
+
+                DOM.selection.list.querySelectorAll('.panel-qty-minus').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var idx = parseInt(this.dataset.index);
+                        if (state.selected[idx]) {
+                            state.selected[idx].qty -= 1;
+                            if (state.selected[idx].qty <= 0) {
+                                state.selected.splice(idx, 1);
+                            }
+                            updateAll();
+                        }
+                    });
+                });
+
+                DOM.selection.list.querySelectorAll('.btn-remove-item').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var idx = parseInt(this.dataset.index);
+                        if (state.selected[idx]) {
+                            state.selected.splice(idx, 1);
+                            updateAll();
+                        }
+                    });
+                });
+
+                var subtotal = getSubtotal();
+                var delivery = getDeliveryCost(subtotal);
+                var total = subtotal + delivery;
+
+                DOM.selection.subtotal.textContent = '$' + subtotal.toFixed(2);
+                DOM.selection.delivery.textContent = '$' + delivery.toFixed(2);
+                DOM.selection.total.textContent = '$' + total.toFixed(2);
+                DOM.selection.summary.classList.add('visible');
+            }
+
+            function updateBottomBar() {
+                var count = getTotalItems();
+                var subtotal = getSubtotal();
+                var delivery = getDeliveryCost(subtotal);
+                var total = subtotal + delivery;
+
+                if (count === 0 || DOM.pages.contact.classList.contains('active')) {
+                    DOM.bottomBar.bar.classList.remove('visible');
+                    return;
+                }
+
+                DOM.bottomBar.bar.classList.add('visible');
+                DOM.bottomBar.badge.textContent = count;
+                DOM.bottomBar.count.textContent = count;
+                DOM.bottomBar.total.textContent = '$' + total.toFixed(2);
+            }
+
+            function updateContactPreview() {
+                var count = getTotalItems();
+
+                if (count === 0) {
+                    if (DOM.contact.nameDisplay) DOM.contact.nameDisplay.textContent = currentLang === 'en' ? 'No products selected' : 'ምርት አልተመረጠም';
+                    if (DOM.contact.nameDisplayAm) DOM.contact.nameDisplayAm.textContent = currentLang === 'am' ? 'ምርት አልተመረጠም' : '';
+                    DOM.contact.priceDisplay.textContent = '0 items';
+                    DOM.contact.previewImage.src =
+                        'https://th.bing.com/th/id/OIP.3wF5dXGkLXV9V8i6VjUoJAHaHa?w=180&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3';
+                    return;
+                }
+
+                var names = state.selected.map(function(s) {
+                    if (s.isBag) return s.bagName || 'Bag';
+                    var p = getProduct(s.id);
+                    return p ? (currentLang === 'en' ? p.nameEn : p.nameAm) : '';
+                }).filter(Boolean).join(', ');
+
+                if (DOM.contact.nameDisplay) DOM.contact.nameDisplay.textContent = names.length > 40 ? names.substring(0, 40) + '...' : names;
+                if (DOM.contact.nameDisplayAm) DOM.contact.nameDisplayAm.textContent = names.length > 40 ? names.substring(0, 40) + '...' : names;
+                DOM.contact.priceDisplay.textContent = count + ' items';
+
+                var first = state.selected[0];
+                if (first) {
+                    DOM.contact.previewImage.src = first.image ||
+                        'https://th.bing.com/th/id/OIP.3wF5dXGkLXV9V8i6VjUoJAHaHa?w=180&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3';
+                }
+            }
+
+            function updateMessagePreview() {
+                var count = getTotalItems();
+                if (count === 0) {
+                    DOM.contact.messagePreview.innerHTML =
+                        '<span style="color:var(--text-muted);">' + (currentLang === 'en' ? 'No products selected' : 'ምርት አልተመረጠም') + '</span>';
+                    return;
+                }
+
+                var name = DOM.contact.name.value.trim() || (currentLang === 'en' ? 'Customer' : 'ደንበኛ');
+                var phone = DOM.contact.phone.value.trim() || '+1 437 879 3601';
+                var notes = DOM.contact.notes.value.trim() || '';
+
+                var productLines = state.selected.map(function(s) {
+                    var nameStr = '';
+                    var price = 0;
+                    if (s.isBag) {
+                        nameStr = s.bagName || 'Bag';
+                        price = s.bagPrice || 0;
+                    } else {
+                        var p = getProduct(s.id);
+                        nameStr = p ? (currentLang === 'en' ? p.nameEn : p.nameAm) : '';
+                        price = p ? p.price : 0;
+                    }
+                    var itemLabel = currentLang === 'en' ? 'item' : 'ዕቃ';
+                    var plural = currentLang === 'en' ? 's' : 'ዎች';
+                    return '  ' + nameStr + '  ' + s.qty + ' ' + itemLabel + (s.qty > 1 ? plural : '') + ' @ $' + price.toFixed(2) + ' = $' + (price * s.qty).toFixed(2);
+                }).join('\n');
+
+                var locMsg = currentLang === 'en' ?
+                    'Location not shared (please provide address in notes)' :
+                    'ቦታ አልተጋራም (እባክዎ አድራሻ በማስታወሻ ውስጥ ያስገቡ)';
+                if (state.locationShared) {
+                    if (state.locationText) {
+                        locMsg = state.locationText;
+                    } else if (state.location && state.location.lat) {
+                        locMsg = 'https://www.google.com/maps?q=' + state.location.lat + ',' + state.location.lng;
+                    }
+                }
+
+                var subtotal = getSubtotal();
+                var delivery = getDeliveryCost(subtotal);
+                var total = subtotal + delivery;
+
+                var nameLabel = currentLang === 'en' ? 'name' : 'ስም';
+                var phoneLabel = currentLang === 'en' ? 'phone' : 'ስልክ';
+                var productLabel = currentLang === 'en' ? 'product' : 'ምርቶች';
+                var locationLabel = currentLang === 'en' ? 'location' : 'ቦታ';
+                var messageLabel = currentLang === 'en' ? 'message' : 'መልእክት';
+                var notesLabel = currentLang === 'en' ? 'No additional notes' : 'ምንም ተጨማሪ ማስታወሻ የለም';
+                var subtotalLabel = currentLang === 'en' ? 'Subtotal' : 'ድምር';
+                var deliveryLabel = currentLang === 'en' ? 'Delivery' : 'መላኪያ';
+                var totalLabel = currentLang === 'en' ? 'Total' : 'ጠቅላላ';
+
+                var preview = nameLabel + ' : ' + name + '\n' +
+                              phoneLabel + ' : ' + phone + '\n' +
+                              productLabel + ' :\n' + productLines + '\n' +
+                              locationLabel + ' : ' + locMsg + '\n' +
+                              subtotalLabel + ' : $' + subtotal.toFixed(2) + '\n' +
+                              deliveryLabel + ' : $' + delivery.toFixed(2) + '\n' +
+                              totalLabel + ' : $' + total.toFixed(2) + '\n' +
+                              messageLabel + ' : ' + (notes || notesLabel);
+
+                DOM.contact.messagePreview.innerHTML = preview.replace(/\n/g, '<br>');
+            }
+
+            // ============================================================
+            // PAGE NAVIGATION
+            // ============================================================
+            function showPage(page) {
+                DOM.pages.home.classList.remove('active');
+                DOM.pages.contact.classList.remove('active');
+
+                if (page === 'home') {
+                    DOM.pages.home.classList.add('active');
+                    state.currentPage = 'home';
+                    updateBottomBar();
+                } else if (page === 'contact') {
+                    if (getTotalItems() === 0) {
+                        alert(currentLang === 'en' ? 'Please select at least one product first.' :
+                            'እባክዎ ቢያንስ አንድ ምርት ይምረጡ።');
+                        return;
+                    }
+                    DOM.pages.contact.classList.add('active');
+                    state.currentPage = 'contact';
+                    DOM.bottomBar.bar.classList.remove('visible');
+                    updateContactPreview();
+                    updateMessagePreview();
+                }
+
+                saveState();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // ============================================================
+            // THEME
+            // ============================================================
+            function setTheme(theme) {
+                state.theme = theme;
+                if (theme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    DOM.nav.theme.innerHTML = '<i class="fas fa-sun"></i> ' + (currentLang === 'en' ? 'Light' : 'ብርሃን');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    DOM.nav.theme.innerHTML = '<i class="fas fa-moon"></i> ' + (currentLang === 'en' ? 'Theme' : 'ጨለማ');
+                }
+                saveState();
+            }
+
+            function toggleTheme() {
+                setTheme(state.theme === 'dark' ? 'light' : 'dark');
+            }
+
+            // ============================================================
+            // WHATSAPP ORDER
+            // ============================================================
+            function submitOrder() {
+                if (getTotalItems() === 0) {
+                    alert(currentLang === 'en' ? 'Please select at least one product.' :
+                        'እባክዎ ቢያንስ አንድ ምርት ይምረጡ።');
+                    return;
+                }
+
+                var name = DOM.contact.name.value.trim() || (currentLang === 'en' ? 'Customer' : 'ደንበኛ');
+                var phone = DOM.contact.phone.value.trim() || '+1 437 879 3601';
+                var notes = DOM.contact.notes.value.trim() || '';
+
+                var productLines = state.selected.map(function(s) {
+                    var nameStr = '';
+                    var price = 0;
+                    if (s.isBag) {
+                        nameStr = s.bagName || 'Bag';
+                        price = s.bagPrice || 0;
+                    } else {
+                        var p = getProduct(s.id);
+                        nameStr = p ? (currentLang === 'en' ? p.nameEn : p.nameAm) : '';
+                        price = p ? p.price : 0;
+                    }
+                    var itemLabel = currentLang === 'en' ? 'item' : 'ዕቃ';
+                    var plural = currentLang === 'en' ? 's' : 'ዎች';
+                    return '  ' + nameStr + '  ' + s.qty + ' ' + itemLabel + (s.qty > 1 ? plural : '') + ' @ $' + price.toFixed(2) + ' = $' + (price * s.qty).toFixed(2);
+                }).join('\n');
+
+                var locMsg = currentLang === 'en' ?
+                    'Location not shared (please provide address in notes)' :
+                    'ቦታ አልተጋራም (እባክዎ አድራሻ በማስታወሻ ውስጥ ያስገቡ)';
+                if (state.locationShared) {
+                    if (state.locationText) {
+                        locMsg = state.locationText;
+                    } else if (state.location && state.location.lat) {
+                        locMsg = 'https://www.google.com/maps?q=' + state.location.lat + ',' + state.location.lng;
+                    }
+                }
+
+                var subtotal = getSubtotal();
+                var delivery = getDeliveryCost(subtotal);
+                var total = subtotal + delivery;
+
+                var nameLabel = currentLang === 'en' ? 'name' : 'ስም';
+                var phoneLabel = currentLang === 'en' ? 'phone' : 'ስልክ';
+                var productLabel = currentLang === 'en' ? 'product' : 'ምርቶች';
+                var locationLabel = currentLang === 'en' ? 'location' : 'ቦታ';
+                var messageLabel = currentLang === 'en' ? 'message' : 'መልእክት';
+                var notesLabel = currentLang === 'en' ? 'No additional notes' : 'ምንም ተጨማሪ ማስታወሻ የለም';
+                var subtotalLabel = currentLang === 'en' ? 'Subtotal' : 'ድምር';
+                var deliveryLabel = currentLang === 'en' ? 'Delivery' : 'መላኪያ';
+                var totalLabel = currentLang === 'en' ? 'Total' : 'ጠቅላላ';
+
+                var fullMsg = nameLabel + ' : ' + name + '\n' +
+                              phoneLabel + ' : ' + phone + '\n' +
+                              productLabel + ' :\n' + productLines + '\n' +
+                              locationLabel + ' : ' + locMsg + '\n' +
+                              subtotalLabel + ' : $' + subtotal.toFixed(2) + '\n' +
+                              deliveryLabel + ' : $' + delivery.toFixed(2) + '\n' +
+                              totalLabel + ' : $' + total.toFixed(2) + '\n' +
+                              messageLabel + ' : ' + (notes || notesLabel);
+
+                var waUrl = 'https://wa.me/' + CONFIG.WHATSAPP_NUMBER + '?text=' + encodeURIComponent(fullMsg);
+
+                DOM.contact.submitBtn.innerHTML =
+                    '<span class="spinner"></span> ' + (currentLang === 'en' ? 'Opening...' : 'በመክፈት ላይ...');
+                DOM.contact.submitBtn.disabled = true;
+
+                var alertMsg = currentLang === 'en' ?
+                    '✅ Order ready!\n\nTotal: $' + total.toFixed(2) + '\nLocation: ' + (state.locationShared ? 'Shared ✓' : 'Not shared') :
+                    '✅ ትዕዛዝ ዝግጁ ነው!\n\nጠቅላላ: $' + total.toFixed(2) + '\nቦታ: ' + (state.locationShared ? 'ተጋርቷል ✓' : 'አልተጋራም');
+                alert(alertMsg);
+
+                setTimeout(function() {
+                    window.open(waUrl, '_blank');
+                    DOM.contact.submitBtn.innerHTML =
+                        '<i class="fab fa-whatsapp"></i> ' + (currentLang === 'en' ? 'Send via WhatsApp' : 'በዋትሳፕ ላክ');
+                    DOM.contact.submitBtn.disabled = false;
+                }, 400);
+            }
+
+            // ============================================================
+            // EVENT LISTENERS
+            // ============================================================
+            DOM.lang.buttons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    setLanguage(this.dataset.lang);
+                    updateAll();
+                    setTheme(state.theme);
+                });
+            });
+
+            DOM.nav.home.addEventListener('click', function() { showPage('home'); });
+            DOM.nav.contact.addEventListener('click', function() { showPage('contact'); });
+            DOM.nav.back.addEventListener('click', function() { showPage('home'); });
+            DOM.nav.theme.addEventListener('click', toggleTheme);
+
+            DOM.search.addEventListener('input', function() {
+                state.searchTerm = this.value.trim();
+                renderProducts();
+            });
+
+            DOM.location.shareBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                getGPSLocation();
+            });
+
+            DOM.location.manualBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openManualModal();
+            });
+
+            DOM.location.clearBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                var confirmMsg = currentLang === 'en' ? 'Clear your saved location?' : 'የተቀመጠውን ቦታ ማጽዳት ይፈልጋሉ?';
+                if (confirm(confirmMsg)) {
+                    clearLocation();
+                }
+            });
+
+            DOM.modal.save.addEventListener('click', function() {
+                var address = DOM.modal.address.value.trim();
+                if (setLocationManual(address)) {
+                    var successMsg = currentLang === 'en' ? '✅ Location saved successfully!' :
+                        '✅ ቦታዎ በተሳካ ሁኔታ ተቀምጧል!';
+                    alert(successMsg);
+                }
+            });
+
+            DOM.modal.cancel.addEventListener('click', closeManualModal);
+            DOM.modal.overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeManualModal();
+                }
+            });
+            DOM.modal.address.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    DOM.modal.save.click();
+                }
+            });
+
+            DOM.bagModal.close.addEventListener('click', closeBagModal);
+            DOM.bagModal.overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeBagModal();
+                }
+            });
+
+            DOM.bagModal.options.querySelectorAll('.bag-option').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                    if (currentProductNoBag) return;
+                    selectBagSize(this.dataset.size, parseFloat(this.dataset.multiplier));
+                });
+            });
+
+            DOM.bagModal.qtyMinus.addEventListener('click', function() {
+                updateBagQty(-1);
+            });
+            DOM.bagModal.qtyPlus.addEventListener('click', function() {
+                updateBagQty(1);
+            });
+            DOM.bagModal.addBtn.addEventListener('click', addBagToCart);
+            DOM.bagModal.skipBtn.addEventListener('click', function() {
+                if (state.pendingProductId) {
+                    var id = state.pendingProductId;
+                    var idx = state.selected.findIndex(function(s) { return s.id === id && !s.isBag; });
+                    if (idx > -1) {
+                        state.selected[idx].qty += 1;
+                    } else {
+                        state.selected.push({ id: id, qty: 1, isBag: false });
+                    }
+                    closeBagModal();
+                    updateAll();
+                } else {
+                    closeBagModal();
+                }
+            });
+
+            DOM.selection.clear.addEventListener('click', clearSelection);
+            DOM.selection.chat.addEventListener('click', function() { showPage('contact'); });
+            DOM.selection.proceed.addEventListener('click', function() { showPage('contact'); });
+            DOM.selection.selectAll.addEventListener('click', selectAll);
+            DOM.selection.deselectAll.addEventListener('click', deselectAll);
+
+            DOM.bottomBar.clear.addEventListener('click', clearSelection);
+            DOM.bottomBar.chat.addEventListener('click', function() { showPage('contact'); });
+            DOM.bottomBar.contact.addEventListener('click', function() { showPage('contact'); });
+
+            DOM.contact.form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (!state.locationShared) {
+                    var choiceMsg = currentLang === 'en' ?
+                        '📍 You have not shared your location.\n\nShare your GPS location now?\n\n• OK to share GPS\n• Cancel to continue without GPS' :
+                        '📍 ቦታዎን አላጋሩም።\n\nአሁን ጂፒኤስ ማጋራት ይፈልጋሉ?\n\n• ጂፒኤስ ለማጋራት እሺ ይጫኑ\n• ያለ ጂፒኤስ ለመቀጠል ሰርዝ ይጫኑ';
+                    var choice = confirm(choiceMsg);
+                    if (choice) {
+                        getGPSLocation().catch(function(error) {
+                            var retryMsg = currentLang === 'en' ?
+                                '⚠️ GPS failed. Continue without location?' :
+                                '⚠️ ጂፒኤስ አልተሳካም። ያለ ቦታ መቀጠል ይፈልጋሉ?';
+                            if (!confirm(retryMsg)) {
+                                return;
+                            }
+                        });
+                    }
+                }
+                submitOrder();
+            });
+
+            DOM.contact.name.addEventListener('input', updateMessagePreview);
+            DOM.contact.phone.addEventListener('input', updateMessagePreview);
+            DOM.contact.notes.addEventListener('input', updateMessagePreview);
+
+            // ============================================================
+            // INIT
+            // ============================================================
+            loadState();
+
+            if (state.theme === 'dark') {
+                document.body.classList.add('dark-mode');
+                DOM.nav.theme.innerHTML = '<i class="fas fa-sun"></i> ' + (currentLang === 'en' ? 'Light' : 'ብርሃን');
+            } else {
+                DOM.nav.theme.innerHTML = '<i class="fas fa-moon"></i> ' + (currentLang === 'en' ? 'Theme' : 'ጨለማ');
+            }
+
+            if (state.locationShared) {
+                var displayText = state.locationText || (state.location && state.location.lat ?
+                    state.location.lat.toFixed(6) + ', ' + state.location.lng.toFixed(6) :
+                    (currentLang === 'en' ? 'Shared' : 'ተጋርቷል'));
+                updateLocationStatus('shared', currentLang === 'en' ? 'Shared' : 'ተጋርቷል', displayText);
+                DOM.location.clearBtn.style.display = 'inline-flex';
+            } else {
+                updateLocationStatus('default', currentLang === 'en' ? 'Not shared' : 'አልተጋራም');
+            }
+
+            renderProducts();
+            updateAll();
+
+            if (state.currentPage === 'contact' && getTotalItems() > 0) {
+                showPage('contact');
+            } else {
+                showPage('home');
+            }
+
+            console.log('🏪 KOBA CONVENIENCE STORE loaded successfully!');
+            console.log('📍 Location:', state.locationShared ? 'Shared ✓' : 'Not shared');
+            console.log('📦 Items:', getTotalItems());
+            console.log('🌐 Language:', currentLang);
+
+        })();
+    </script>
+
+</body>
+</html>
